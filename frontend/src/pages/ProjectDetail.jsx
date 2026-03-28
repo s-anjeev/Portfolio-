@@ -51,14 +51,14 @@ const ProjectDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       {/* Header */}
-      <header className="sticky top-0 bg-white/90 backdrop-blur-md z-50 border-b border-gray-200">
+      <header className="sticky top-0 bg-white/90 backdrop-blur-md z-50 border-b border-blue-200">
         <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
           <Button 
             variant="ghost" 
             onClick={() => navigate('/')}
-            className="hover:translate-x-[-4px] transition-transform"
+            className="hover:translate-x-[-4px] transition-transform text-blue-700 hover:text-blue-900"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Projects
@@ -70,13 +70,13 @@ const ProjectDetail = () => {
       </header>
 
       {/* Hero Image */}
-      <div className="relative h-96 overflow-hidden">
+      <div className="relative h-96 overflow-hidden border-b-4 border-blue-600">
         <img 
           src={project.thumbnail} 
           alt={project.title}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-12 text-white">
           <div className="max-w-6xl mx-auto">
             <Badge variant="outline" className="mb-4 border-white text-white">
@@ -98,17 +98,17 @@ const ProjectDetail = () => {
         
         {/* Executive Summary */}
         <section className="space-y-6">
-          <h2 className="text-4xl font-light tracking-tight">Executive Summary</h2>
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <h2 className="text-4xl font-light tracking-tight text-blue-900">Executive Summary</h2>
+          <p className="text-lg text-blue-800 leading-relaxed bg-blue-50/50 p-6 rounded-lg border-l-4 border-blue-600">
             {project.detailedReport.executiveSummary}
           </p>
         </section>
 
-        <Separator />
+        <Separator className="bg-blue-200" />
 
         {/* Timeline */}
         <section className="space-y-6">
-          <h2 className="text-4xl font-light tracking-tight">Incident Timeline</h2>
+          <h2 className="text-4xl font-light tracking-tight text-blue-900">Incident Timeline</h2>
           <div className="space-y-4">
             {project.detailedReport.timeline.map((event, index) => (
               <div 
@@ -116,17 +116,17 @@ const ProjectDetail = () => {
                 className="flex gap-6 items-start group hover:translate-x-2 transition-transform duration-300"
               >
                 <div className="flex flex-col items-center">
-                  <div className="p-3 bg-gray-100 rounded-full group-hover:bg-black group-hover:text-white transition-colors">
+                  <div className="p-3 bg-blue-100 rounded-full group-hover:bg-blue-700 group-hover:text-white transition-colors">
                     {getTimelineIcon(event.status)}
                   </div>
                   {index < project.detailedReport.timeline.length - 1 && (
-                    <div className="w-0.5 h-12 bg-gray-200 my-2" />
+                    <div className="w-0.5 h-12 bg-blue-200 my-2" />
                   )}
                 </div>
                 <div className="flex-1 pb-4">
-                  <div className="text-sm font-medium text-gray-500 mb-1">{event.time}</div>
-                  <p className="text-lg text-gray-800">{event.event}</p>
-                  <Badge variant="outline" className="mt-2 text-xs capitalize">
+                  <div className="text-sm font-medium text-blue-600 mb-1">{event.time}</div>
+                  <p className="text-lg text-blue-900">{event.event}</p>
+                  <Badge variant="outline" className="mt-2 text-xs capitalize border-blue-300 text-blue-700">
                     {event.status}
                   </Badge>
                 </div>
@@ -135,11 +135,11 @@ const ProjectDetail = () => {
           </div>
         </section>
 
-        <Separator />
+        <Separator className="bg-blue-200" />
 
         {/* Key Findings */}
         <section className="space-y-6">
-          <h2 className="text-4xl font-light tracking-tight">Key Findings</h2>
+          <h2 className="text-4xl font-light tracking-tight text-blue-900">Key Findings</h2>
           <div className="grid gap-6">
             {project.detailedReport.findings.map((finding, index) => (
               <Card 
@@ -160,12 +160,12 @@ const ProjectDetail = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="text-blue-800 leading-relaxed">
                     {finding.description}
                   </p>
-                  <div className="pt-3 border-t border-gray-200">
-                    <span className="text-sm font-medium text-gray-600">Evidence: </span>
-                    <span className="text-sm text-gray-500 font-mono">{finding.evidence}</span>
+                  <div className="pt-3 border-t border-blue-200">
+                    <span className="text-sm font-medium text-blue-700">Evidence: </span>
+                    <span className="text-sm text-blue-600 font-mono">{finding.evidence}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -173,37 +173,37 @@ const ProjectDetail = () => {
           </div>
         </section>
 
-        <Separator />
+        <Separator className="bg-blue-200" />
 
         {/* Recommendations */}
         <section className="space-y-6">
-          <h2 className="text-4xl font-light tracking-tight">Recommendations</h2>
+          <h2 className="text-4xl font-light tracking-tight text-blue-900">Recommendations</h2>
           <div className="grid gap-4">
             {project.detailedReport.recommendations.map((rec, index) => (
               <div 
                 key={index}
-                className="flex gap-4 items-start p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                className="flex gap-4 items-start p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors border-l-4 border-blue-600"
               >
-                <div className="flex-shrink-0 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center text-sm font-light">
+                <div className="flex-shrink-0 w-8 h-8 bg-blue-700 text-white rounded-full flex items-center justify-center text-sm font-light shadow-lg shadow-blue-500/30">
                   {index + 1}
                 </div>
-                <p className="text-gray-800 pt-1">{rec}</p>
+                <p className="text-blue-900 pt-1">{rec}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <Separator />
+        <Separator className="bg-blue-200" />
 
         {/* Tools Used */}
         <section className="space-y-6">
-          <h2 className="text-4xl font-light tracking-tight">Tools & Technologies</h2>
+          <h2 className="text-4xl font-light tracking-tight text-blue-900">Tools & Technologies</h2>
           <div className="flex flex-wrap gap-3">
             {project.detailedReport.toolsUsed.map((tool, index) => (
               <Badge 
                 key={index}
                 variant="outline"
-                className="px-4 py-2 text-sm hover:bg-black hover:text-white transition-colors cursor-default"
+                className="px-4 py-2 text-sm border-blue-300 text-blue-700 hover:bg-blue-700 hover:text-white hover:border-blue-700 transition-colors cursor-default"
               >
                 {tool}
               </Badge>
@@ -216,7 +216,7 @@ const ProjectDetail = () => {
           <Button 
             size="lg"
             onClick={() => navigate('/')}
-            className="hover:scale-105 transition-transform"
+            className="hover:scale-105 transition-transform bg-blue-700 hover:bg-blue-800"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             View All Projects
@@ -225,9 +225,9 @@ const ProjectDetail = () => {
       </div>
 
       {/* Footer */}
-      <footer className="mt-24 py-8 px-6 bg-black text-white">
-        <div className="max-w-6xl mx-auto text-center text-sm text-gray-400">
-          <p>Incident Response Portfolio - Detailed Case Study</p>
+      <footer className="mt-24 py-8 px-6 bg-blue-950 text-blue-100">
+        <div className="max-w-6xl mx-auto text-center text-sm">
+          <p className="text-blue-300">Incident Response Portfolio - Detailed Case Study</p>
         </div>
       </footer>
     </div>
