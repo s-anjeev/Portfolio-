@@ -36,22 +36,22 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900">
       {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-blue-100' : 'bg-transparent'
+        scrolled ? 'bg-slate-900/80 backdrop-blur-xl shadow-lg shadow-blue-900/20 border-b border-blue-700/30' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
-          <div className="text-2xl font-light tracking-tight text-blue-900">{studentInfo.name}</div>
+          <div className="text-2xl font-light tracking-tight text-white">{studentInfo.name}</div>
           <div className="flex gap-8 items-center">
-            <a href="#projects" className="text-sm text-blue-700 hover:text-blue-900 hover:translate-y-[-2px] transition-all duration-200">Projects</a>
-            <a href="#tools" className="text-sm text-blue-700 hover:text-blue-900 hover:translate-y-[-2px] transition-all duration-200">Tools</a>
-            <a href="#contact" className="text-sm text-blue-700 hover:text-blue-900 hover:translate-y-[-2px] transition-all duration-200">Contact</a>
+            <a href="#projects" className="text-sm text-blue-200 hover:text-white hover:translate-y-[-2px] transition-all duration-200">Projects</a>
+            <a href="#tools" className="text-sm text-blue-200 hover:text-white hover:translate-y-[-2px] transition-all duration-200">Tools</a>
+            <a href="#contact" className="text-sm text-blue-200 hover:text-white hover:translate-y-[-2px] transition-all duration-200">Contact</a>
             <Button 
               onClick={handleResumeDownload}
               variant="outline" 
               size="sm"
-              className="hover:scale-105 transition-transform duration-200"
+              className="border-blue-400 text-blue-200 hover:bg-blue-500 hover:text-white hover:scale-105 transition-all duration-200"
             >
               <Download className="w-4 h-4 mr-2" />
               Resume
@@ -62,33 +62,34 @@ const Home = () => {
 
       {/* Hero / Intro Section */}
       <section className="min-h-screen flex items-center justify-center px-6 pt-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-100/20 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent pointer-events-none" />
         <div className="max-w-4xl text-center space-y-8 animate-in fade-in duration-1000 relative z-10">
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 mb-8 rotate-animation shadow-lg shadow-blue-500/30">
-            <Shield className="w-12 h-12 text-white" />
+          <div className="inline-flex items-center justify-center w-28 h-28 rounded-full bg-gradient-to-br from-blue-400 via-blue-500 to-cyan-500 mb-8 rotate-animation shadow-2xl shadow-blue-500/50 ring-4 ring-blue-400/20">
+            <Shield className="w-14 h-14 text-white drop-shadow-lg" />
           </div>
-          <h1 className="text-7xl md:text-8xl font-extralight tracking-tight leading-none bg-gradient-to-br from-blue-900 via-blue-700 to-blue-600 bg-clip-text text-transparent">
+          <h1 className="text-7xl md:text-9xl font-extralight tracking-tight leading-none text-white drop-shadow-2xl">
             {studentInfo.name}
           </h1>
-          <p className="text-2xl font-light text-blue-800 tracking-wide">
+          <p className="text-2xl font-light text-blue-100 tracking-wide drop-shadow-lg">
             {studentInfo.title}
           </p>
-          <p className="text-lg text-blue-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-blue-200 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
             {studentInfo.bio}
           </p>
           <div className="flex gap-4 justify-center pt-8">
             <a href={studentInfo.linkedin} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="icon" className="hover:scale-110 transition-transform">
+              <Button variant="outline" size="icon" className="border-blue-300 text-blue-100 hover:bg-blue-500 hover:border-blue-400 hover:scale-110 transition-all backdrop-blur-sm">
                 <Linkedin className="w-5 h-5" />
               </Button>
             </a>
             <a href={studentInfo.github} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="icon" className="hover:scale-110 transition-transform">
+              <Button variant="outline" size="icon" className="border-blue-300 text-blue-100 hover:bg-blue-500 hover:border-blue-400 hover:scale-110 transition-all backdrop-blur-sm">
                 <Github className="w-5 h-5" />
               </Button>
             </a>
             <a href={`mailto:${studentInfo.email}`}>
-              <Button variant="outline" size="icon" className="hover:scale-110 transition-transform">
+              <Button variant="outline" size="icon" className="border-blue-300 text-blue-100 hover:bg-blue-500 hover:border-blue-400 hover:scale-110 transition-all backdrop-blur-sm">
                 <Mail className="w-5 h-5" />
               </Button>
             </a>
@@ -97,9 +98,10 @@ const Home = () => {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-24 px-6 bg-gradient-to-br from-blue-50/50 to-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-light mb-16 text-center tracking-tight text-blue-900">Experience</h2>
+      <section id="experience" className="py-24 px-6 bg-slate-900 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-slate-900 to-slate-900 pointer-events-none" />
+        <div className="max-w-6xl mx-auto relative z-10">
+          <h2 className="text-5xl font-light mb-16 text-center tracking-tight text-white">Experience</h2>
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <div 
@@ -107,17 +109,17 @@ const Home = () => {
                 className="group hover:translate-x-2 transition-all duration-300"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="flex gap-8 items-start">
-                  <div className="text-4xl font-extralight text-blue-300 min-w-[100px]">
+                <div className="flex gap-8 items-start bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-700/20 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-900/20 transition-all">
+                  <div className="text-4xl font-extralight text-blue-400 min-w-[100px]">
                     {exp.year}
                   </div>
-                  <div className="flex-1 pb-8 border-b border-blue-100 group-hover:border-blue-400 transition-colors">
-                    <h3 className="text-2xl font-light mb-2 text-blue-900">{exp.role}</h3>
-                    <div className="flex items-center gap-2 text-blue-600 mb-3">
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-light mb-2 text-white">{exp.role}</h3>
+                    <div className="flex items-center gap-2 text-blue-300 mb-3">
                       <Briefcase className="w-4 h-4" />
                       <span className="text-sm">{exp.company}</span>
                     </div>
-                    <p className="text-blue-700/80 leading-relaxed">{exp.description}</p>
+                    <p className="text-blue-200/80 leading-relaxed">{exp.description}</p>
                   </div>
                 </div>
               </div>
@@ -127,30 +129,32 @@ const Home = () => {
       </section>
 
       {/* Projects Grid Section */}
-      <section id="projects" className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-light mb-6 text-center tracking-tight text-blue-900">Incident Response Projects</h2>
-          <p className="text-center text-blue-600 mb-16 max-w-2xl mx-auto">
+      <section id="projects" className="py-24 px-6 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-800 relative">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <h2 className="text-5xl font-light mb-6 text-center tracking-tight text-white">Incident Response Projects</h2>
+          <p className="text-center text-blue-200 mb-16 max-w-2xl mx-auto">
             Comprehensive investigations and forensic analysis of real-world security incidents
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <Card 
                 key={project.id}
-                className="group cursor-pointer overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                className="group cursor-pointer overflow-hidden bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/30 transition-all duration-300 hover:-translate-y-3"
                 onClick={() => navigate(`/project/${project.id}`)}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="aspect-[4/3] overflow-hidden">
+                <div className="aspect-[4/3] overflow-hidden relative">
                   <img 
                     src={project.thumbnail} 
                     alt={project.title}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                 </div>
                 <CardContent className="p-6 space-y-3">
                   <div className="flex items-center justify-between">
-                    <Badge variant="outline" className="text-xs border-blue-300 text-blue-700">
+                    <Badge variant="outline" className="text-xs border-blue-400 text-blue-300 bg-blue-950/50">
                       {project.category}
                     </Badge>
                     <Badge 
@@ -160,18 +164,18 @@ const Home = () => {
                       {project.severity}
                     </Badge>
                   </div>
-                  <h3 className="text-xl font-light group-hover:translate-x-1 transition-transform text-blue-900">
+                  <h3 className="text-xl font-light group-hover:translate-x-1 transition-transform text-white">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-blue-600 line-clamp-2">
+                  <p className="text-sm text-blue-200 line-clamp-2">
                     {project.summary}
                   </p>
                   <div className="flex items-center justify-between pt-2">
-                    <span className="text-xs text-blue-400 flex items-center gap-1">
+                    <span className="text-xs text-blue-300 flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       {project.date}
                     </span>
-                    <ChevronRight className="w-5 h-5 text-blue-400 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="w-5 h-5 text-blue-300 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>
@@ -181,42 +185,43 @@ const Home = () => {
       </section>
 
       {/* Tools Section */}
-      <section id="tools" className="py-24 px-6 bg-gradient-to-br from-blue-50 to-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-light mb-6 text-center tracking-tight text-blue-900">Tools & Methodology</h2>
-          <p className="text-center text-blue-600 mb-16 max-w-2xl mx-auto">
+      <section id="tools" className="py-24 px-6 bg-slate-900 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-slate-900 to-slate-900 pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <h2 className="text-5xl font-light mb-6 text-center tracking-tight text-white">Tools & Methodology</h2>
+          <p className="text-center text-blue-200 mb-16 max-w-2xl mx-auto">
             Arsenal of forensic and analysis tools used in incident investigations
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {tools.map((tool, index) => (
               <Card 
                 key={tool.id}
-                className="group hover:shadow-lg transition-all duration-300"
+                className="group bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/20 transition-all duration-300"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <CardContent className="p-8 space-y-4">
                   <div className="flex items-start gap-4">
-                    <div className="p-3 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg text-white group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/30">
+                    <div className="p-4 bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-600 rounded-xl text-white group-hover:scale-110 transition-transform shadow-xl shadow-blue-500/40 ring-2 ring-blue-400/30">
                       {getToolIcon(tool.icon)}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-xl font-light text-blue-900">{tool.name}</h3>
-                        <Badge variant="outline" className="text-xs border-blue-300 text-blue-700">
+                        <h3 className="text-xl font-light text-white">{tool.name}</h3>
+                        <Badge variant="outline" className="text-xs border-blue-400 text-blue-300 bg-blue-950/50">
                           {tool.category}
                         </Badge>
                       </div>
-                      <p className="text-sm text-blue-600 mb-4">{tool.description}</p>
+                      <p className="text-sm text-blue-200 mb-4">{tool.description}</p>
                     </div>
                   </div>
-                  <div className="space-y-3 pt-4 border-t border-blue-100">
+                  <div className="space-y-3 pt-4 border-t border-blue-700/30">
                     <div>
-                      <h4 className="text-sm font-medium mb-1 text-blue-900">Usage in Investigations:</h4>
-                      <p className="text-sm text-blue-700/80">{tool.usage}</p>
+                      <h4 className="text-sm font-medium mb-1 text-blue-300">Usage in Investigations:</h4>
+                      <p className="text-sm text-blue-200/80">{tool.usage}</p>
                     </div>
                     <div>
-                      <h4 className="text-sm font-medium mb-1 text-blue-900">Key Findings:</h4>
-                      <p className="text-sm text-blue-700/80">{tool.findings}</p>
+                      <h4 className="text-sm font-medium mb-1 text-blue-300">Key Findings:</h4>
+                      <p className="text-sm text-blue-200/80">{tool.findings}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -227,24 +232,25 @@ const Home = () => {
       </section>
 
       {/* Drive Section */}
-      <section id="drive" className="py-24 px-6 bg-white">
-        <div className="max-w-4xl mx-auto text-center space-y-12">
-          <h2 className="text-5xl font-light tracking-tight text-blue-900">{driveMotivation.title}</h2>
-          <p className="text-lg text-blue-700 leading-relaxed">
+      <section id="drive" className="py-24 px-6 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-800 relative">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent pointer-events-none" />
+        <div className="max-w-4xl mx-auto text-center space-y-12 relative z-10">
+          <h2 className="text-5xl font-light tracking-tight text-white">{driveMotivation.title}</h2>
+          <p className="text-lg text-blue-100 leading-relaxed">
             {driveMotivation.content}
           </p>
-          <blockquote className="text-2xl font-light italic text-blue-800 border-l-4 border-blue-600 pl-6 py-4 my-12 bg-blue-50/50 rounded-r-lg">
+          <blockquote className="text-2xl font-light italic text-white border-l-4 border-cyan-400 pl-6 py-4 my-12 bg-slate-800/60 backdrop-blur-sm rounded-r-lg shadow-xl">
             "{driveMotivation.quote}"
           </blockquote>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
             {driveMotivation.passions.map((passion, index) => (
               <div 
                 key={index}
-                className="space-y-3 hover:translate-y-[-5px] transition-transform duration-300 p-6 rounded-lg hover:bg-blue-50/50"
+                className="space-y-3 hover:translate-y-[-5px] transition-transform duration-300 p-6 rounded-xl bg-slate-800/60 backdrop-blur-sm border border-blue-700/30 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-900/20"
               >
-                <Award className="w-10 h-10 mx-auto mb-4 text-blue-600" />
-                <h3 className="text-xl font-light text-blue-900">{passion.title}</h3>
-                <p className="text-sm text-blue-600">{passion.description}</p>
+                <Award className="w-10 h-10 mx-auto mb-4 text-cyan-400" />
+                <h3 className="text-xl font-light text-white">{passion.title}</h3>
+                <p className="text-sm text-blue-200">{passion.description}</p>
               </div>
             ))}
           </div>
