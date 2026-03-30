@@ -12,12 +12,33 @@ const ProjectDetail = () => {
   const navigate = useNavigate();
   const project = projects.find(p => p.id === parseInt(id));
 
+  React.useEffect(() => {
+    // Scroll to top on mount
+    window.scrollTo(0, 0);
+
+    // Animate elements on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    const revealElements = document.querySelectorAll('[class*="scroll-reveal"]');
+    revealElements.forEach(el => observer.observe(el));
+
+    return () => {
+      revealElements.forEach(el => observer.unobserve(el));
+    };
+  }, []);
+
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
         <div className="text-center space-y-4">
-          <h2 className="text-2xl font-light">Project not found</h2>
-          <Button onClick={() => navigate('/')}>
+          <h2 className="text-2xl font-light text-white">Project not found</h2>
+          <Button onClick={() => navigate('/')} className="bg-gradient-to-r from-blue-600 to-cyan-600">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Button>
@@ -97,9 +118,9 @@ const ProjectDetail = () => {
       <div className="max-w-6xl mx-auto px-6 py-16 space-y-16">
         
         {/* Executive Summary */}
-        <section className="space-y-6">
+        <section className="space-y-6 scroll-reveal">
           <h2 className="text-4xl font-light tracking-tight text-white">Executive Summary</h2>
-          <p className="text-lg text-blue-100 leading-relaxed bg-slate-800/60 backdrop-blur-sm p-8 rounded-xl border-l-4 border-cyan-400 shadow-xl">
+          <p className="text-lg text-blue-100 leading-relaxed bg-slate-800/60 backdrop-blur-sm p-8 rounded-xl border-l-4 border-cyan-400 shadow-xl hover:shadow-2xl hover:shadow-blue-900/30 transition-all duration-500">
             {project.detailedReport.executiveSummary}
           </p>
         </section>
@@ -107,23 +128,23 @@ const ProjectDetail = () => {
         <Separator className="bg-blue-700/30" />
 
         {/* Timeline */}
-        <section className="space-y-6">
+        <section className="space-y-6 scroll-reveal stagger-1">
           <h2 className="text-4xl font-light tracking-tight text-white">Incident Timeline</h2>
           <div className="space-y-4">
             {project.detailedReport.timeline.map((event, index) => (
               <div 
                 key={index}
-                className="flex gap-6 items-start group hover:translate-x-2 transition-transform duration-300"
+                className={`flex gap-6 items-start group hover:translate-x-2 transition-transform duration-300 scroll-reveal-left stagger-${(index % 6) + 1}`}
               >
                 <div className="flex flex-col items-center">
-                  <div className="p-3 bg-slate-800 border border-blue-700/50 rounded-full group-hover:bg-gradient-to-br group-hover:from-blue-500 group-hover:to-cyan-500 group-hover:border-cyan-400 text-blue-300 group-hover:text-white transition-all shadow-lg">
+                  <div className="p-3 bg-slate-800 border border-blue-700/50 rounded-full group-hover:bg-gradient-to-br group-hover:from-blue-500 group-hover:to-cyan-500 group-hover:border-cyan-400 text-blue-300 group-hover:text-white transition-all duration-500 shadow-lg group-hover:scale-110">
                     {getTimelineIcon(event.status)}
                   </div>
                   {index < project.detailedReport.timeline.length - 1 && (
-                    <div className="w-0.5 h-12 bg-blue-700/30 my-2" />
+                    <div className="w-0.5 h-12 bg-blue-700/30 my-2 group-hover:bg-cyan-400 transition-colors duration-500" />
                   )}
                 </div>
-                <div className="flex-1 pb-4 bg-slate-800/40 backdrop-blur-sm p-4 rounded-lg border border-blue-700/20 group-hover:border-blue-500/50 transition-all">
+                <div className="flex-1 pb-4 bg-slate-800/40 backdrop-blur-sm p-4 rounded-lg border border-blue-700/20 group-hover:border-blue-500/50 group-hover:shadow-lg transition-all duration-500">
                   <div className="text-sm font-medium text-cyan-400 mb-1">{event.time}</div>
                   <p className="text-lg text-white mb-2">{event.event}</p>
                   <Badge variant="outline" className="mt-2 text-xs capitalize border-blue-400 text-blue-300 bg-blue-950/50">
@@ -138,13 +159,13 @@ const ProjectDetail = () => {
         <Separator className="bg-blue-700/30" />
 
         {/* Key Findings */}
-        <section className="space-y-6">
+        <section className="space-y-6 scroll-reveal stagger-2">
           <h2 className="text-4xl font-light tracking-tight text-white">Key Findings</h2>
           <div className="grid gap-6">
             {project.detailedReport.findings.map((finding, index) => (
               <Card 
                 key={index}
-                className={`border-2 bg-slate-800/60 backdrop-blur-sm ${getSeverityColor(finding.severity)} shadow-xl`}
+                className={`border-2 bg-slate-800/60 backdrop-blur-sm ${getSeverityColor(finding.severity)} shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 scroll-reveal-scale stagger-${index + 1}`}
               >
                 <CardHeader>
                   <div className="flex items-start justify-between">
@@ -176,15 +197,15 @@ const ProjectDetail = () => {
         <Separator className="bg-blue-700/30" />
 
         {/* Recommendations */}
-        <section className="space-y-6">
+        <section className="space-y-6 scroll-reveal stagger-3">
           <h2 className="text-4xl font-light tracking-tight text-white">Recommendations</h2>
           <div className="grid gap-4">
             {project.detailedReport.recommendations.map((rec, index) => (
               <div 
                 key={index}
-                className="flex gap-4 items-start p-6 bg-slate-800/60 backdrop-blur-sm rounded-xl hover:bg-slate-800/80 transition-colors border-l-4 border-cyan-400 shadow-lg hover:shadow-xl hover:shadow-blue-900/20"
+                className={`flex gap-4 items-start p-6 bg-slate-800/60 backdrop-blur-sm rounded-xl hover:bg-slate-800/80 transition-all duration-500 border-l-4 border-cyan-400 shadow-lg hover:shadow-xl hover:shadow-blue-900/20 hover:translate-x-2 scroll-reveal-left stagger-${(index % 5) + 1}`}
               >
-                <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-full flex items-center justify-center text-sm font-light shadow-lg shadow-blue-500/40 ring-2 ring-blue-400/30">
+                <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-full flex items-center justify-center text-sm font-light shadow-lg shadow-blue-500/40 ring-2 ring-blue-400/30 group-hover:scale-110 transition-transform duration-300">
                   {index + 1}
                 </div>
                 <p className="text-blue-100 pt-2">{rec}</p>
@@ -196,14 +217,14 @@ const ProjectDetail = () => {
         <Separator className="bg-blue-700/30" />
 
         {/* Tools Used */}
-        <section className="space-y-6">
+        <section className="space-y-6 scroll-reveal stagger-4">
           <h2 className="text-4xl font-light tracking-tight text-white">Tools & Technologies</h2>
           <div className="flex flex-wrap gap-3">
             {project.detailedReport.toolsUsed.map((tool, index) => (
               <Badge 
                 key={index}
                 variant="outline"
-                className="px-5 py-2 text-sm border-blue-400 text-blue-200 hover:bg-gradient-to-r hover:from-blue-600 hover:to-cyan-600 hover:text-white hover:border-cyan-400 transition-all cursor-default shadow-lg backdrop-blur-sm bg-slate-800/60"
+                className={`px-5 py-2 text-sm border-blue-400 text-blue-200 hover:bg-gradient-to-r hover:from-blue-600 hover:to-cyan-600 hover:text-white hover:border-cyan-400 hover:scale-110 transition-all duration-500 cursor-default shadow-lg backdrop-blur-sm bg-slate-800/60 scroll-reveal-scale stagger-${(index % 6) + 1}`}
               >
                 {tool}
               </Badge>
@@ -212,11 +233,11 @@ const ProjectDetail = () => {
         </section>
 
         {/* Back Button */}
-        <div className="pt-8 text-center">
+        <div className="pt-8 text-center scroll-reveal stagger-5">
           <Button 
             size="lg"
             onClick={() => navigate('/')}
-            className="hover:scale-105 transition-transform bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 shadow-xl shadow-blue-900/40"
+            className="hover:scale-110 transition-all duration-500 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 shadow-xl shadow-blue-900/40 hover:shadow-2xl hover:shadow-blue-900/60"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             View All Projects

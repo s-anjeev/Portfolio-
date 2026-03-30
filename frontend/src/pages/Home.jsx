@@ -13,13 +13,51 @@ import { studentInfo, experiences, projects, tools, driveMotivation } from '../m
 const Home = () => {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      
+      // Parallax effect for sections
+      const scrolled = window.scrollY;
+      const parallaxElements = document.querySelectorAll('.parallax');
+      parallaxElements.forEach(el => {
+        const speed = el.dataset.speed || 0.5;
+        el.style.transform = `translateY(${scrolled * speed}px)`;
+      });
     };
+
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with scroll-reveal classes
+    const revealElements = document.querySelectorAll('[class*="scroll-reveal"]');
+    revealElements.forEach(el => observer.observe(el));
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+      revealElements.forEach(el => observer.unobserve(el));
+    };
   }, []);
 
   const getToolIcon = (iconName) => {
@@ -62,34 +100,34 @@ const Home = () => {
 
       {/* Hero / Intro Section */}
       <section className="min-h-screen flex items-center justify-center px-6 pt-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent pointer-events-none parallax" data-speed="0.3" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent pointer-events-none" />
-        <div className="max-w-4xl text-center space-y-8 animate-in fade-in duration-1000 relative z-10">
-          <div className="inline-flex items-center justify-center w-28 h-28 rounded-full bg-gradient-to-br from-blue-400 via-blue-500 to-cyan-500 mb-8 rotate-animation shadow-2xl shadow-blue-500/50 ring-4 ring-blue-400/20">
+        <div className="max-w-4xl text-center space-y-8 relative z-10">
+          <div className="inline-flex items-center justify-center w-28 h-28 rounded-full bg-gradient-to-br from-blue-400 via-blue-500 to-cyan-500 mb-8 float-animation pulse-glow-animation shadow-2xl ring-4 ring-blue-400/20">
             <Shield className="w-14 h-14 text-white drop-shadow-lg" />
           </div>
-          <h1 className="text-7xl md:text-9xl font-extralight tracking-tight leading-none text-white drop-shadow-2xl">
+          <h1 className="text-7xl md:text-9xl font-extralight tracking-tight leading-none text-white drop-shadow-2xl scroll-reveal-scale">
             {studentInfo.name}
           </h1>
-          <p className="text-2xl font-light text-blue-100 tracking-wide drop-shadow-lg">
+          <p className="text-2xl font-light text-blue-100 tracking-wide drop-shadow-lg scroll-reveal stagger-1">
             {studentInfo.title}
           </p>
-          <p className="text-lg text-blue-200 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+          <p className="text-lg text-blue-200 max-w-2xl mx-auto leading-relaxed drop-shadow-md scroll-reveal stagger-2">
             {studentInfo.bio}
           </p>
-          <div className="flex gap-4 justify-center pt-8">
+          <div className="flex gap-4 justify-center pt-8 scroll-reveal stagger-3">
             <a href={studentInfo.linkedin} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="icon" className="border-blue-300 text-blue-100 hover:bg-blue-500 hover:border-blue-400 hover:scale-110 transition-all backdrop-blur-sm">
+              <Button variant="outline" size="icon" className="border-blue-300 text-blue-100 hover:bg-blue-500 hover:border-blue-400 hover:scale-110 hover:rotate-6 transition-all duration-300 backdrop-blur-sm">
                 <Linkedin className="w-5 h-5" />
               </Button>
             </a>
             <a href={studentInfo.github} target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="icon" className="border-blue-300 text-blue-100 hover:bg-blue-500 hover:border-blue-400 hover:scale-110 transition-all backdrop-blur-sm">
+              <Button variant="outline" size="icon" className="border-blue-300 text-blue-100 hover:bg-blue-500 hover:border-blue-400 hover:scale-110 hover:rotate-6 transition-all duration-300 backdrop-blur-sm">
                 <Github className="w-5 h-5" />
               </Button>
             </a>
             <a href={`mailto:${studentInfo.email}`}>
-              <Button variant="outline" size="icon" className="border-blue-300 text-blue-100 hover:bg-blue-500 hover:border-blue-400 hover:scale-110 transition-all backdrop-blur-sm">
+              <Button variant="outline" size="icon" className="border-blue-300 text-blue-100 hover:bg-blue-500 hover:border-blue-400 hover:scale-110 hover:rotate-6 transition-all duration-300 backdrop-blur-sm">
                 <Mail className="w-5 h-5" />
               </Button>
             </a>
@@ -99,18 +137,17 @@ const Home = () => {
 
       {/* Experience Section */}
       <section id="experience" className="py-24 px-6 bg-slate-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-slate-900 to-slate-900 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-slate-900 to-slate-900 pointer-events-none parallax" data-speed="0.2" />
         <div className="max-w-6xl mx-auto relative z-10">
-          <h2 className="text-5xl font-light mb-16 text-center tracking-tight text-white">Experience</h2>
+          <h2 className="text-5xl font-light mb-16 text-center tracking-tight text-white scroll-reveal">Experience</h2>
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <div 
                 key={exp.id} 
-                className="group hover:translate-x-2 transition-all duration-300"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className={`group hover:translate-x-2 transition-all duration-300 scroll-reveal-left stagger-${index + 1}`}
               >
-                <div className="flex gap-8 items-start bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-700/20 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-900/20 transition-all">
-                  <div className="text-4xl font-extralight text-blue-400 min-w-[100px]">
+                <div className="flex gap-8 items-start bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-700/20 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-900/20 transition-all duration-500">
+                  <div className="text-4xl font-extralight text-blue-400 min-w-[100px] group-hover:scale-110 transition-transform duration-300">
                     {exp.year}
                   </div>
                   <div className="flex-1">
@@ -130,27 +167,26 @@ const Home = () => {
 
       {/* Projects Grid Section */}
       <section id="projects" className="py-24 px-6 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-800 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent pointer-events-none parallax" data-speed="0.15" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <h2 className="text-5xl font-light mb-6 text-center tracking-tight text-white">Incident Response Projects</h2>
-          <p className="text-center text-blue-200 mb-16 max-w-2xl mx-auto">
+          <h2 className="text-5xl font-light mb-6 text-center tracking-tight text-white scroll-reveal">Incident Response Projects</h2>
+          <p className="text-center text-blue-200 mb-16 max-w-2xl mx-auto scroll-reveal stagger-1">
             Comprehensive investigations and forensic analysis of real-world security incidents
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <Card 
                 key={project.id}
-                className="group cursor-pointer overflow-hidden bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/30 transition-all duration-300 hover:-translate-y-3"
+                className={`group cursor-pointer overflow-hidden bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/30 transition-all duration-500 hover:-translate-y-3 scroll-reveal-scale stagger-${(index % 3) + 1}`}
                 onClick={() => navigate(`/project/${project.id}`)}
-                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="aspect-[4/3] overflow-hidden relative">
                   <img 
                     src={project.thumbnail} 
                     alt={project.title}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
                 </div>
                 <CardContent className="p-6 space-y-3">
                   <div className="flex items-center justify-between">
@@ -186,22 +222,21 @@ const Home = () => {
 
       {/* Tools Section */}
       <section id="tools" className="py-24 px-6 bg-slate-900 relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-slate-900 to-slate-900 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-slate-900 to-slate-900 pointer-events-none parallax" data-speed="0.1" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <h2 className="text-5xl font-light mb-6 text-center tracking-tight text-white">Tools & Methodology</h2>
-          <p className="text-center text-blue-200 mb-16 max-w-2xl mx-auto">
+          <h2 className="text-5xl font-light mb-6 text-center tracking-tight text-white scroll-reveal">Tools & Methodology</h2>
+          <p className="text-center text-blue-200 mb-16 max-w-2xl mx-auto scroll-reveal stagger-1">
             Arsenal of forensic and analysis tools used in incident investigations
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {tools.map((tool, index) => (
               <Card 
                 key={tool.id}
-                className="group bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/20 transition-all duration-300"
-                style={{ animationDelay: `${index * 50}ms` }}
+                className={`group bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/20 transition-all duration-500 scroll-reveal stagger-${(index % 2) + 1}`}
               >
                 <CardContent className="p-8 space-y-4">
                   <div className="flex items-start gap-4">
-                    <div className="p-4 bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-600 rounded-xl text-white group-hover:scale-110 transition-transform shadow-xl shadow-blue-500/40 ring-2 ring-blue-400/30">
+                    <div className="p-4 bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-600 rounded-xl text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-xl shadow-blue-500/40 ring-2 ring-blue-400/30">
                       {getToolIcon(tool.icon)}
                     </div>
                     <div className="flex-1">
@@ -233,22 +268,22 @@ const Home = () => {
 
       {/* Drive Section */}
       <section id="drive" className="py-24 px-6 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-800 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent pointer-events-none parallax" data-speed="0.05" />
         <div className="max-w-4xl mx-auto text-center space-y-12 relative z-10">
-          <h2 className="text-5xl font-light tracking-tight text-white">{driveMotivation.title}</h2>
-          <p className="text-lg text-blue-100 leading-relaxed">
+          <h2 className="text-5xl font-light tracking-tight text-white scroll-reveal">{driveMotivation.title}</h2>
+          <p className="text-lg text-blue-100 leading-relaxed scroll-reveal stagger-1">
             {driveMotivation.content}
           </p>
-          <blockquote className="text-2xl font-light italic text-white border-l-4 border-cyan-400 pl-6 py-4 my-12 bg-slate-800/60 backdrop-blur-sm rounded-r-lg shadow-xl">
+          <blockquote className="text-2xl font-light italic text-white border-l-4 border-cyan-400 pl-6 py-4 my-12 bg-slate-800/60 backdrop-blur-sm rounded-r-lg shadow-xl scroll-reveal-left stagger-2">
             "{driveMotivation.quote}"
           </blockquote>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
             {driveMotivation.passions.map((passion, index) => (
               <div 
                 key={index}
-                className="space-y-3 hover:translate-y-[-5px] transition-transform duration-300 p-6 rounded-xl bg-slate-800/60 backdrop-blur-sm border border-blue-700/30 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-900/20"
+                className={`space-y-3 hover:translate-y-[-5px] transition-all duration-500 p-6 rounded-xl bg-slate-800/60 backdrop-blur-sm border border-blue-700/30 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-900/20 scroll-reveal-scale stagger-${index + 3}`}
               >
-                <Award className="w-10 h-10 mx-auto mb-4 text-cyan-400" />
+                <Award className="w-10 h-10 mx-auto mb-4 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" />
                 <h3 className="text-xl font-light text-white">{passion.title}</h3>
                 <p className="text-sm text-blue-200">{passion.description}</p>
               </div>
