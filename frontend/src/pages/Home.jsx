@@ -265,57 +265,65 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Projects Grid Section */}
+      {/* Incident Response & Writeups Section */}
       <section id="projects" className="py-24 px-6 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-800 relative">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent pointer-events-none parallax" data-speed="0.15" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <h2 className="text-5xl font-light mb-6 text-center tracking-tight text-white scroll-reveal">Incident Response Projects</h2>
-          <p className="text-center text-blue-200 mb-16 max-w-2xl mx-auto scroll-reveal stagger-1">
-            Comprehensive investigations and forensic analysis of real-world security incidents
+          <h2 className="text-5xl font-light mb-6 text-center tracking-tight scroll-reveal">
+            <span className="text-white">Incident Response & </span>
+            <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">Writeups</span>
+          </h2>
+          <p className="text-center text-blue-200/80 mb-16 max-w-2xl mx-auto scroll-reveal stagger-1">
+            Documentation of my journey through offensive security, digital forensics, and SOC operations.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) =>
-            <Card
-              key={project.id}
-              className={`group cursor-pointer overflow-hidden bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/30 transition-all duration-500 hover:-translate-y-3 scroll-reveal-scale stagger-${index % 3 + 1}`}
-              onClick={() => navigate(`/project/${project.id}`)}>
-
-                <div className="aspect-[4/3] overflow-hidden relative">
-                  <img
-                  src={project.thumbnail}
-                  alt={project.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
-                </div>
-                <CardContent className="p-6 space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project, index) => (
+              <Card 
+                key={project.id}
+                className={`group cursor-pointer overflow-hidden bg-slate-900/80 backdrop-blur-sm border-slate-700/50 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-900/20 scroll-reveal-scale stagger-${(index % 3) + 1}`}
+                onClick={() => navigate(`/project/${project.id}`)}
+              >
+                <CardContent className="p-6 space-y-4">
+                  {/* Header with category and read time */}
                   <div className="flex items-center justify-between">
-                    <Badge variant="outline" className="text-xs border-blue-400 text-blue-300 bg-blue-950/50">
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/50 text-xs">
                       {project.category}
                     </Badge>
-                    <Badge
-                    variant={project.severity === 'Critical' ? 'destructive' : 'secondary'}
-                    className="text-xs">
-
-                      {project.severity}
-                    </Badge>
+                    <span className="text-xs text-slate-400 flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {project.readTime || "5 min read"}
+                    </span>
                   </div>
-                  <h3 className="text-xl font-light group-hover:translate-x-1 transition-transform text-white">
+
+                  {/* Title */}
+                  <h3 className="text-xl font-light text-white group-hover:text-cyan-300 transition-colors line-clamp-2">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-blue-200 line-clamp-2">
+
+                  {/* Description */}
+                  <p className="text-sm text-blue-200/70 line-clamp-3 leading-relaxed">
                     {project.summary}
                   </p>
-                  <div className="flex items-center justify-between pt-2">
-                    <span className="text-xs text-blue-300 flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {project.date}
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {project.tags && project.tags.slice(0, 3).map((tag, idx) => (
+                      <span key={idx} className="text-xs text-blue-400/70 hover:text-cyan-400 transition-colors">
+                        #{tag.toLowerCase().replace(/\s+/g, '')}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Read Article Link */}
+                  <div className="pt-2">
+                    <span className="text-cyan-400 text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                      Read Article
+                      <ChevronRight className="w-4 h-4" />
                     </span>
-                    <ChevronRight className="w-5 h-5 text-blue-300 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>
-            )}
+            ))}
           </div>
         </div>
       </section>
