@@ -135,32 +135,132 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section id="experience" className="py-24 px-6 bg-slate-900 relative">
+      {/* Career Timeline Section */}
+      <section id="timeline" className="py-24 px-6 bg-slate-900 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-slate-900 to-slate-900 pointer-events-none parallax" data-speed="0.2" />
-        <div className="max-w-6xl mx-auto relative z-10">
-          <h2 className="text-5xl font-light mb-16 text-center tracking-tight text-white scroll-reveal">Experience</h2>
-          <div className="space-y-12">
-            {experiences.map((exp, index) =>
-            <div
-              key={exp.id}
-              className={`group hover:translate-x-2 transition-all duration-300 scroll-reveal-left stagger-${index + 1}`}>
-
-                <div className="flex gap-8 items-start bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-700/20 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-900/20 transition-all duration-500">
-                  <div className="text-4xl font-extralight text-blue-400 min-w-[100px] group-hover:scale-110 transition-transform duration-300">
-                    {exp.year}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-light mb-2 text-white">{exp.role}</h3>
-                    <div className="flex items-center gap-2 text-blue-300 mb-3">
-                      <Briefcase className="w-4 h-4" />
-                      <span className="text-sm">{exp.company}</span>
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-5xl font-light mb-4 text-center tracking-tight text-white scroll-reveal">Career Timeline</h2>
+          <p className="text-center text-blue-300/80 mb-16 scroll-reveal stagger-1">Key milestones in my cybersecurity journey — from education to hands-on threat detection.</p>
+          
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-[15px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-500/50 via-blue-500/30 to-transparent" />
+            
+            <div className="space-y-12">
+              {/* Education - Bottom/First */}
+              <div className="relative scroll-reveal-left stagger-1">
+                {/* Timeline Dot */}
+                <div className="absolute left-0 top-6 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 ring-4 ring-slate-900 flex items-center justify-center">
+                  <Award className="w-4 h-4 text-white" />
+                </div>
+                
+                <div className="ml-16 bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-blue-700/30 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-900/20">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h3 className="text-xl font-light text-white mb-1">Bachelor of Computer Applications</h3>
+                      <p className="text-cyan-400 text-sm font-medium">Himachal Pradesh Technical University</p>
                     </div>
-                    <p className="text-blue-200/80 leading-relaxed">{exp.description}</p>
+                    <Badge variant="outline" className="border-cyan-500/50 text-cyan-300 bg-cyan-950/30">
+                      Graduated
+                    </Badge>
+                  </div>
+                  <p className="text-blue-200/70 text-sm leading-relaxed">
+                    Built strong foundations in networking, operating systems, web application security, and cloud computing that serve as the backbone of cybersecurity expertise.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <Badge variant="outline" className="border-blue-500/30 text-blue-300 bg-blue-950/30 text-xs">
+                      Networking
+                    </Badge>
+                    <Badge variant="outline" className="border-blue-500/30 text-blue-300 bg-blue-950/30 text-xs">
+                      Web Security
+                    </Badge>
+                    <Badge variant="outline" className="border-blue-500/30 text-blue-300 bg-blue-950/30 text-xs">
+                      Cloud Computing
+                    </Badge>
                   </div>
                 </div>
               </div>
-            )}
+
+              {/* First Internship - SECURE SLEUTHS */}
+              <div className="relative scroll-reveal-left stagger-2">
+                {/* Timeline Dot */}
+                <div className="absolute left-0 top-6 w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 ring-4 ring-slate-900 flex items-center justify-center">
+                  <Briefcase className="w-4 h-4 text-white" />
+                </div>
+                
+                <div className="ml-16 bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-blue-700/30 hover:border-orange-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-orange-900/20 group">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h3 className="text-xl font-light text-white mb-1">VAPT Intern</h3>
+                      <p className="text-orange-400 text-sm font-medium">SECURE SLEUTHS</p>
+                    </div>
+                    <Badge variant="outline" className="border-slate-600 text-slate-400 bg-slate-800/50">
+                      Aug 2024 - Nov 2024
+                    </Badge>
+                  </div>
+                  <p className="text-blue-200/70 text-sm leading-relaxed mb-3">
+                    Performed VAPT on web applications, APIs, and network infrastructure for 5+ clients, identifying 25+ vulnerabilities. Analyzed and validated vulnerabilities (SQLi, XSS, CSRF) using Burp Suite, OWASP ZAP, Metasploit, and Nmap.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <Badge variant="outline" className="border-orange-500/30 text-orange-300 bg-orange-950/30 text-xs">
+                      VAPT
+                    </Badge>
+                    <Badge variant="outline" className="border-orange-500/30 text-orange-300 bg-orange-950/30 text-xs">
+                      Burp Suite
+                    </Badge>
+                    <Badge variant="outline" className="border-orange-500/30 text-orange-300 bg-orange-950/30 text-xs">
+                      Metasploit
+                    </Badge>
+                    <Badge variant="outline" className="border-orange-500/30 text-orange-300 bg-orange-950/30 text-xs">
+                      Nmap
+                    </Badge>
+                    <Badge variant="outline" className="border-orange-500/30 text-orange-300 bg-orange-950/30 text-xs">
+                      OWASP ZAP
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+
+              {/* Second Internship - AMAHA (Most Recent) */}
+              <div className="relative scroll-reveal-left stagger-3">
+                {/* Timeline Dot - Glowing for current */}
+                <div className="absolute left-0 top-6 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 ring-4 ring-slate-900 flex items-center justify-center animate-pulse">
+                  <Shield className="w-4 h-4 text-white" />
+                </div>
+                
+                <div className="ml-16 bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/50 hover:border-cyan-400/70 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-900/30 group">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h3 className="text-xl font-light text-white mb-1">Cyber Security Intern</h3>
+                      <p className="text-cyan-400 text-sm font-medium">AMAHA (innerHour)</p>
+                    </div>
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/50">
+                      Nov 2024 - Feb 2025
+                    </Badge>
+                  </div>
+                  <p className="text-blue-200/70 text-sm leading-relaxed mb-3">
+                    Conducted penetration testing on web applications and APIs, identifying 20+ vulnerabilities (5 critical). Managed VPN infrastructure for 400+ employees and implemented Cloudflare CDN, reducing web-based attacks by ~30%. Led bug bounty triage (35+ reports) and OSINT investigations.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
+                      VAPT
+                    </Badge>
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
+                      Splunk
+                    </Badge>
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
+                      Wazuh
+                    </Badge>
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
+                      Nessus
+                    </Badge>
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
+                      Burp Suite
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
