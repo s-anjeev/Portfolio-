@@ -334,48 +334,262 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Tools Section */}
+      {/* Technical Arsenal Section */}
       <section id="tools" className="py-24 px-6 bg-slate-900 relative">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-slate-900 to-slate-900 pointer-events-none parallax" data-speed="0.1" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <h2 className="text-5xl font-light mb-6 text-center tracking-tight text-white scroll-reveal">Tools & Methodology</h2>
+          <h2 className="text-5xl font-light mb-6 text-center tracking-tight scroll-reveal">
+            <span className="text-white">Technical </span>
+            <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent">Arsenal</span>
+          </h2>
           <p className="text-center text-blue-200 mb-16 max-w-2xl mx-auto scroll-reveal stagger-1">
-            Arsenal of forensic and analysis tools used in incident investigations
+            A comprehensive toolkit honed through real-world security operations and continuous learning
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {tools.map((tool, index) =>
-            <Card
-              key={tool.id}
-              className={`group bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/20 transition-all duration-500 scroll-reveal stagger-${index % 2 + 1}`}>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* SIEM & Monitoring */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-cyan-700/30 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-900/20 scroll-reveal stagger-1">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg">
+                    <Database className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">SIEM & Monitoring</h3>
+                    <p className="text-xs text-cyan-400">3 tools</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Splunk</span>
+                    <Badge variant="outline" className="border-cyan-500/50 text-cyan-300 bg-cyan-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Wazuh</span>
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/20 text-xs">Intermediate</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">ELK Stack</span>
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/20 text-xs">Intermediate</Badge>
+                  </div>
+                </div>
+                <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Alert triage, rule tuning, IOC correlation</p>
+              </CardContent>
+            </Card>
 
-                <CardContent className="p-8 space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="p-4 bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-600 rounded-xl text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-xl shadow-blue-500/40 ring-2 ring-blue-400/30">
-                      {getToolIcon(tool.icon)}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-xl font-light text-white">{tool.name}</h3>
-                        <Badge variant="outline" className="text-xs border-blue-400 text-blue-300 bg-blue-950/50">
-                          {tool.category}
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-blue-200 mb-4">{tool.description}</p>
-                    </div>
+            {/* Vulnerability Assessment */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-orange-700/30 hover:border-orange-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-orange-900/20 scroll-reveal stagger-2">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg">
+                    <Search className="w-6 h-6 text-white" />
                   </div>
-                  <div className="space-y-3 pt-4 border-t border-blue-700/30">
-                    <div>
-                      <h4 className="text-sm font-medium mb-1 text-blue-300">Usage in Investigations:</h4>
-                      <p className="text-sm text-blue-200/80">{tool.usage}</p>
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-medium mb-1 text-blue-300">Key Findings:</h4>
-                      <p className="text-sm text-blue-200/80">{tool.findings}</p>
-                    </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Vulnerability Assessment</h3>
+                    <p className="text-xs text-orange-400">4 tools</p>
                   </div>
-                </CardContent>
-              </Card>
-            )}
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Burp Suite</span>
+                    <Badge variant="outline" className="border-orange-500/50 text-orange-300 bg-orange-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">OWASP ZAP</span>
+                    <Badge variant="outline" className="border-orange-500/50 text-orange-300 bg-orange-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Nmap</span>
+                    <Badge variant="outline" className="border-orange-500/50 text-orange-300 bg-orange-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Nessus</span>
+                    <Badge variant="outline" className="border-orange-500/30 text-orange-300 bg-orange-950/20 text-xs">Intermediate</Badge>
+                  </div>
+                </div>
+                <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Web app testing, API security, network scanning</p>
+              </CardContent>
+            </Card>
+
+            {/* Penetration Testing */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-red-700/30 hover:border-red-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-red-900/20 scroll-reveal stagger-3">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-gradient-to-br from-red-500 to-red-600 rounded-lg">
+                    <Shield className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Penetration Testing</h3>
+                    <p className="text-xs text-red-400">3 tools</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Metasploit</span>
+                    <Badge variant="outline" className="border-red-500/50 text-red-300 bg-red-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Kali Linux</span>
+                    <Badge variant="outline" className="border-red-500/50 text-red-300 bg-red-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Burp Suite</span>
+                    <Badge variant="outline" className="border-red-500/50 text-red-300 bg-red-950/30 text-xs">Advanced</Badge>
+                  </div>
+                </div>
+                <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Exploitation, privilege escalation, post-exploitation</p>
+              </CardContent>
+            </Card>
+
+            {/* Network Analysis */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/20 scroll-reveal stagger-4">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg">
+                    <Network className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Network Analysis</h3>
+                    <p className="text-xs text-blue-400">3 tools</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Wireshark</span>
+                    <Badge variant="outline" className="border-blue-500/50 text-blue-300 bg-blue-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">TCP/IP</span>
+                    <Badge variant="outline" className="border-blue-500/50 text-blue-300 bg-blue-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">DNS</span>
+                    <Badge variant="outline" className="border-blue-500/30 text-blue-300 bg-blue-950/20 text-xs">Intermediate</Badge>
+                  </div>
+                </div>
+                <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Packet analysis, traffic inspection, protocol forensics</p>
+              </CardContent>
+            </Card>
+
+            {/* Threat Intelligence */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-purple-700/30 hover:border-purple-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-purple-900/20 scroll-reveal stagger-1">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg">
+                    <Brain className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Threat Intelligence</h3>
+                    <p className="text-xs text-purple-400">3 tools</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">MITRE ATT&CK</span>
+                    <Badge variant="outline" className="border-purple-500/50 text-purple-300 bg-purple-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">OSINT Tools</span>
+                    <Badge variant="outline" className="border-purple-500/50 text-purple-300 bg-purple-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">VirusTotal</span>
+                    <Badge variant="outline" className="border-purple-500/30 text-purple-300 bg-purple-950/20 text-xs">Intermediate</Badge>
+                  </div>
+                </div>
+                <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Threat modeling, attack pattern analysis, IOC identification</p>
+              </CardContent>
+            </Card>
+
+            {/* Incident Response */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-yellow-700/30 hover:border-yellow-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-yellow-900/20 scroll-reveal stagger-2">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg">
+                    <Shield className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Incident Response</h3>
+                    <p className="text-xs text-yellow-400">3 tools</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Alert Triage</span>
+                    <Badge variant="outline" className="border-yellow-500/50 text-yellow-300 bg-yellow-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Malware Analysis</span>
+                    <Badge variant="outline" className="border-yellow-500/30 text-yellow-300 bg-yellow-950/20 text-xs">Intermediate</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Forensics</span>
+                    <Badge variant="outline" className="border-yellow-500/30 text-yellow-300 bg-yellow-950/20 text-xs">Intermediate</Badge>
+                  </div>
+                </div>
+                <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Security alert handling, incident investigation, root cause analysis</p>
+              </CardContent>
+            </Card>
+
+            {/* Scripting & Automation */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-green-700/30 hover:border-green-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-green-900/20 scroll-reveal stagger-3">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-gradient-to-br from-green-500 to-green-600 rounded-lg">
+                    <Box className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Scripting & Automation</h3>
+                    <p className="text-xs text-green-400">3 tools</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Python</span>
+                    <Badge variant="outline" className="border-green-500/50 text-green-300 bg-green-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Bash</span>
+                    <Badge variant="outline" className="border-green-500/30 text-green-300 bg-green-950/20 text-xs">Intermediate</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">PowerShell</span>
+                    <Badge variant="outline" className="border-green-500/20 text-green-300 bg-green-950/10 text-xs">Beginner</Badge>
+                  </div>
+                </div>
+                <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Security automation, custom tools, log parsing</p>
+              </CardContent>
+            </Card>
+
+            {/* Cloud & Infrastructure */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-indigo-700/30 hover:border-indigo-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-indigo-900/20 scroll-reveal stagger-4">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg">
+                    <Globe className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-white">Cloud & Infrastructure</h3>
+                    <p className="text-xs text-indigo-400">3 tools</p>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">Cloudflare</span>
+                    <Badge variant="outline" className="border-indigo-500/50 text-indigo-300 bg-indigo-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">VPN Management</span>
+                    <Badge variant="outline" className="border-indigo-500/50 text-indigo-300 bg-indigo-950/30 text-xs">Advanced</Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-200">CDN Security</span>
+                    <Badge variant="outline" className="border-indigo-500/30 text-indigo-300 bg-indigo-950/20 text-xs">Intermediate</Badge>
+                  </div>
+                </div>
+                <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Cloud security posture, CDN hardening, DDoS mitigation</p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
