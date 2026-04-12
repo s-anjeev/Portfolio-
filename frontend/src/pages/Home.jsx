@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Shield, Mail, Linkedin, Github, Download, 
-  Network, Brain, Database, HardDrive, Globe, Box, Search, 
-  ChevronRight, Calendar, MapPin, Briefcase, Award
-} from 'lucide-react';
+import {
+  Shield, Mail, Linkedin, Github, Download,
+  Network, Brain, Database, HardDrive, Globe, Box, Search,
+  ChevronRight, Calendar, MapPin, Briefcase, Award } from
+'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -18,11 +18,11 @@ const Home = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      
+
       // Parallax effect for sections
       const scrolled = window.scrollY;
       const parallaxElements = document.querySelectorAll('.parallax');
-      parallaxElements.forEach(el => {
+      parallaxElements.forEach((el) => {
         const speed = el.dataset.speed || 0.5;
         el.style.transform = `translateY(${scrolled * speed}px)`;
       });
@@ -42,7 +42,7 @@ const Home = () => {
     };
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
         }
@@ -51,12 +51,12 @@ const Home = () => {
 
     // Observe all elements with scroll-reveal classes
     const revealElements = document.querySelectorAll('[class*="scroll-reveal"]');
-    revealElements.forEach(el => observer.observe(el));
+    revealElements.forEach((el) => observer.observe(el));
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
-      revealElements.forEach(el => observer.unobserve(el));
+      revealElements.forEach((el) => observer.unobserve(el));
     };
   }, []);
 
@@ -77,20 +77,20 @@ const Home = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900">
       {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-slate-900/80 backdrop-blur-xl shadow-lg shadow-blue-900/20 border-b border-blue-700/30' : 'bg-transparent'
-      }`}>
+      scrolled ? 'bg-slate-900/80 backdrop-blur-xl shadow-lg shadow-blue-900/20 border-b border-blue-700/30' : 'bg-transparent'}`
+      }>
         <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
           <div className="text-2xl font-light tracking-tight text-white">{studentInfo.name}</div>
           <div className="flex gap-8 items-center">
-            <a href="#projects" className="text-sm text-blue-200 hover:text-white hover:translate-y-[-2px] transition-all duration-200">Projects</a>
+            <a href="#projects" className="text-sm text-blue-200 hover:text-white hover:translate-y-[-2px] transition-all duration-200">Work</a>
             <a href="#tools" className="text-sm text-blue-200 hover:text-white hover:translate-y-[-2px] transition-all duration-200">Tools</a>
             <a href="#contact" className="text-sm text-blue-200 hover:text-white hover:translate-y-[-2px] transition-all duration-200">Contact</a>
-            <Button 
+            <Button
               onClick={handleResumeDownload}
-              variant="outline" 
+              variant="outline"
               size="sm"
-              className="border-blue-400 text-blue-200 hover:bg-blue-500 hover:text-white hover:scale-105 transition-all duration-200"
-            >
+              className="border-blue-400 text-blue-200 hover:bg-blue-500 hover:text-white hover:scale-105 transition-all duration-200">
+
               <Download className="w-4 h-4 mr-2" />
               Resume
             </Button>
@@ -141,11 +141,11 @@ const Home = () => {
         <div className="max-w-6xl mx-auto relative z-10">
           <h2 className="text-5xl font-light mb-16 text-center tracking-tight text-white scroll-reveal">Experience</h2>
           <div className="space-y-12">
-            {experiences.map((exp, index) => (
-              <div 
-                key={exp.id} 
-                className={`group hover:translate-x-2 transition-all duration-300 scroll-reveal-left stagger-${index + 1}`}
-              >
+            {experiences.map((exp, index) =>
+            <div
+              key={exp.id}
+              className={`group hover:translate-x-2 transition-all duration-300 scroll-reveal-left stagger-${index + 1}`}>
+
                 <div className="flex gap-8 items-start bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-blue-700/20 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-900/20 transition-all duration-500">
                   <div className="text-4xl font-extralight text-blue-400 min-w-[100px] group-hover:scale-110 transition-transform duration-300">
                     {exp.year}
@@ -160,7 +160,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -174,18 +174,18 @@ const Home = () => {
             Comprehensive investigations and forensic analysis of real-world security incidents
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <Card 
-                key={project.id}
-                className={`group cursor-pointer overflow-hidden bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/30 transition-all duration-500 hover:-translate-y-3 scroll-reveal-scale stagger-${(index % 3) + 1}`}
-                onClick={() => navigate(`/project/${project.id}`)}
-              >
+            {projects.map((project, index) =>
+            <Card
+              key={project.id}
+              className={`group cursor-pointer overflow-hidden bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/30 transition-all duration-500 hover:-translate-y-3 scroll-reveal-scale stagger-${index % 3 + 1}`}
+              onClick={() => navigate(`/project/${project.id}`)}>
+
                 <div className="aspect-[4/3] overflow-hidden relative">
-                  <img 
-                    src={project.thumbnail} 
-                    alt={project.title}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
-                  />
+                  <img
+                  src={project.thumbnail}
+                  alt={project.title}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
                 </div>
                 <CardContent className="p-6 space-y-3">
@@ -193,10 +193,10 @@ const Home = () => {
                     <Badge variant="outline" className="text-xs border-blue-400 text-blue-300 bg-blue-950/50">
                       {project.category}
                     </Badge>
-                    <Badge 
-                      variant={project.severity === 'Critical' ? 'destructive' : 'secondary'}
-                      className="text-xs"
-                    >
+                    <Badge
+                    variant={project.severity === 'Critical' ? 'destructive' : 'secondary'}
+                    className="text-xs">
+
                       {project.severity}
                     </Badge>
                   </div>
@@ -215,7 +215,7 @@ const Home = () => {
                   </div>
                 </CardContent>
               </Card>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -229,11 +229,11 @@ const Home = () => {
             Arsenal of forensic and analysis tools used in incident investigations
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {tools.map((tool, index) => (
-              <Card 
-                key={tool.id}
-                className={`group bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/20 transition-all duration-500 scroll-reveal stagger-${(index % 2) + 1}`}
-              >
+            {tools.map((tool, index) =>
+            <Card
+              key={tool.id}
+              className={`group bg-slate-800/80 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/20 transition-all duration-500 scroll-reveal stagger-${index % 2 + 1}`}>
+
                 <CardContent className="p-8 space-y-4">
                   <div className="flex items-start gap-4">
                     <div className="p-4 bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-600 rounded-xl text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-xl shadow-blue-500/40 ring-2 ring-blue-400/30">
@@ -261,7 +261,7 @@ const Home = () => {
                   </div>
                 </CardContent>
               </Card>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -278,16 +278,16 @@ const Home = () => {
             "{driveMotivation.quote}"
           </blockquote>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
-            {driveMotivation.passions.map((passion, index) => (
-              <div 
-                key={index}
-                className={`space-y-3 hover:translate-y-[-5px] transition-all duration-500 p-6 rounded-xl bg-slate-800/60 backdrop-blur-sm border border-blue-700/30 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-900/20 scroll-reveal-scale stagger-${index + 3}`}
-              >
+            {driveMotivation.passions.map((passion, index) =>
+            <div
+              key={index}
+              className={`space-y-3 hover:translate-y-[-5px] transition-all duration-500 p-6 rounded-xl bg-slate-800/60 backdrop-blur-sm border border-blue-700/30 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-900/20 scroll-reveal-scale stagger-${index + 3}`}>
+
                 <Award className="w-10 h-10 mx-auto mb-4 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" />
                 <h3 className="text-xl font-light text-white">{passion.title}</h3>
                 <p className="text-sm text-blue-200">{passion.description}</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -303,35 +303,35 @@ const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
             <a href={`mailto:${studentInfo.email}`}>
-              <Button 
-                size="lg" 
-                className="bg-white text-blue-900 hover:bg-blue-50 hover:scale-105 transition-transform shadow-lg"
-              >
+              <Button
+                size="lg"
+                className="bg-white text-blue-900 hover:bg-blue-50 hover:scale-105 transition-transform shadow-lg">
+
                 <Mail className="w-5 h-5 mr-2" />
                 Send Email
               </Button>
             </a>
-            <Button 
+            <Button
               onClick={handleResumeDownload}
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-900 hover:scale-105 transition-all"
-            >
+              className="border-white text-white hover:bg-white hover:text-blue-900 hover:scale-105 transition-all">
+
               <Download className="w-5 h-5 mr-2" />
               Download Resume
             </Button>
           </div>
           <div className="flex gap-6 justify-center pt-8">
-            <a href={studentInfo.linkedin} target="_blank" rel="noopener noreferrer" 
-               className="hover:scale-110 transition-transform text-blue-100 hover:text-white">
+            <a href={studentInfo.linkedin} target="_blank" rel="noopener noreferrer"
+            className="hover:scale-110 transition-transform text-blue-100 hover:text-white">
               <Linkedin className="w-6 h-6" />
             </a>
             <a href={studentInfo.github} target="_blank" rel="noopener noreferrer"
-               className="hover:scale-110 transition-transform text-blue-100 hover:text-white">
+            className="hover:scale-110 transition-transform text-blue-100 hover:text-white">
               <Github className="w-6 h-6" />
             </a>
             <a href={`mailto:${studentInfo.email}`}
-               className="hover:scale-110 transition-transform text-blue-100 hover:text-white">
+            className="hover:scale-110 transition-transform text-blue-100 hover:text-white">
               <Mail className="w-6 h-6" />
             </a>
           </div>
@@ -345,8 +345,8 @@ const Home = () => {
           <p className="mt-2 text-blue-300">Cybersecurity Portfolio - Incident Response Specialist</p>
         </div>
       </footer>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Home;
