@@ -594,83 +594,143 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Drive Section */}
-      <section id="drive" className="py-24 px-6 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-800 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent pointer-events-none parallax" data-speed="0.05" />
-        <div className="max-w-4xl mx-auto text-center space-y-12 relative z-10">
-          <h2 className="text-5xl font-light tracking-tight text-white scroll-reveal">{driveMotivation.title}</h2>
-          <p className="text-lg text-blue-100 leading-relaxed scroll-reveal stagger-1">
-            {driveMotivation.content}
-          </p>
-          <blockquote className="text-2xl font-light italic text-white border-l-4 border-cyan-400 pl-6 py-4 my-12 bg-slate-800/60 backdrop-blur-sm rounded-r-lg shadow-xl scroll-reveal-left stagger-2">
-            "{driveMotivation.quote}"
-          </blockquote>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
-            {driveMotivation.passions.map((passion, index) =>
-            <div
-              key={index}
-              className={`space-y-3 hover:translate-y-[-5px] transition-all duration-500 p-6 rounded-xl bg-slate-800/60 backdrop-blur-sm border border-blue-700/30 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-900/20 scroll-reveal-scale stagger-${index + 3}`}>
-
-                <Award className="w-10 h-10 mx-auto mb-4 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" />
-                <h3 className="text-xl font-light text-white">{passion.title}</h3>
-                <p className="text-sm text-blue-200">{passion.description}</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
-      <section id="contact" className="py-24 px-6 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzYjgyZjYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE4YzAtOS45NC04LjA2LTE4LTE4LTE4UzAgOC4wNiAwIDE4czguMDYgMTggMTggMTggMTgtOC4wNiAxOC0xOHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
-        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
-          <h2 className="text-5xl font-light tracking-tight mb-6">Let's Connect</h2>
-          <p className="text-lg text-blue-100 max-w-2xl mx-auto">
-            Interested in collaboration, opportunities, or discussing cybersecurity? 
-            I'd love to hear from you.
+      <section id="contact" className="py-24 px-6 bg-gradient-to-br from-slate-900 via-blue-900/30 to-slate-900 relative">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent pointer-events-none" />
+        <div className="max-w-5xl mx-auto text-center space-y-12 relative z-10">
+          <h2 className="text-5xl font-light tracking-tight text-white scroll-reveal">Let's Connect</h2>
+          <p className="text-lg text-blue-200 max-w-2xl mx-auto scroll-reveal stagger-1">
+            Open to Security Analyst roles and offensive security opportunities. Let's discuss how I can help secure your organization.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <a href={`mailto:${studentInfo.email}`}>
-              <Button
-                size="lg"
-                className="bg-white text-blue-900 hover:bg-blue-50 hover:scale-105 transition-transform shadow-lg">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8">
+            {/* Email Card */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-blue-700/30 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-900/20 scroll-reveal-scale stagger-1">
+              <CardContent className="p-6 text-center space-y-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <Mail className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-lg font-light text-white">Email</h3>
+                <p className="text-sm text-blue-200/70">Send me a message</p>
+                <a 
+                  href={`mailto:${studentInfo.email}`}
+                  className="block text-cyan-400 hover:text-cyan-300 text-sm break-all transition-colors"
+                >
+                  {studentInfo.email}
+                </a>
+              </CardContent>
+            </Card>
 
-                <Mail className="w-5 h-5 mr-2" />
-                Send Email
-              </Button>
-            </a>
-            <Button
-              onClick={handleResumeDownload}
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-900 hover:scale-105 transition-all">
+            {/* LinkedIn Card */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-blue-700/30 hover:border-blue-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/20 scroll-reveal-scale stagger-2">
+              <CardContent className="p-6 text-center space-y-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <Linkedin className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-lg font-light text-white">LinkedIn</h3>
+                <p className="text-sm text-blue-200/70">Professional network</p>
+                <a 
+                  href={studentInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm transition-colors"
+                >
+                  Connect with me
+                  <ChevronRight className="w-4 h-4" />
+                </a>
+              </CardContent>
+            </Card>
 
-              <Download className="w-5 h-5 mr-2" />
-              Download Resume
-            </Button>
-          </div>
-          <div className="flex gap-6 justify-center pt-8">
-            <a href={studentInfo.linkedin} target="_blank" rel="noopener noreferrer"
-            className="hover:scale-110 transition-transform text-blue-100 hover:text-white">
-              <Linkedin className="w-6 h-6" />
-            </a>
-            <a href={studentInfo.github} target="_blank" rel="noopener noreferrer"
-            className="hover:scale-110 transition-transform text-blue-100 hover:text-white">
-              <Github className="w-6 h-6" />
-            </a>
-            <a href={`mailto:${studentInfo.email}`}
-            className="hover:scale-110 transition-transform text-blue-100 hover:text-white">
-              <Mail className="w-6 h-6" />
-            </a>
+            {/* GitHub Card */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-blue-700/30 hover:border-slate-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-slate-900/20 scroll-reveal-scale stagger-3">
+              <CardContent className="p-6 text-center space-y-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <Github className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-lg font-light text-white">GitHub</h3>
+                <p className="text-sm text-blue-200/70">Code & projects</p>
+                <a 
+                  href={studentInfo.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-300 text-sm transition-colors"
+                >
+                  View repositories
+                  <ChevronRight className="w-4 h-4" />
+                </a>
+              </CardContent>
+            </Card>
+
+            {/* TryHackMe Card */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-red-700/30 hover:border-red-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-red-900/20 scroll-reveal-scale stagger-4">
+              <CardContent className="p-6 text-center space-y-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-red-500 to-red-700 mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <Shield className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-light text-white">TryHackMe</h3>
+                  <Badge className="bg-red-500/20 text-red-300 border-red-500/50 text-xs mt-1">
+                    Top 1%
+                  </Badge>
+                </div>
+                <p className="text-sm text-blue-200/70">CTF challenges & labs</p>
+                <a 
+                  href={studentInfo.tryhackme}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-red-400 hover:text-red-300 text-sm transition-colors"
+                >
+                  View profile
+                  <ChevronRight className="w-4 h-4" />
+                </a>
+              </CardContent>
+            </Card>
+
+            {/* Phone Card */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-blue-700/30 hover:border-green-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-green-900/20 scroll-reveal-scale stagger-5">
+              <CardContent className="p-6 text-center space-y-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-green-700 mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <MapPin className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-lg font-light text-white">Phone</h3>
+                <p className="text-sm text-blue-200/70">Himachal Pradesh, India</p>
+                <a 
+                  href={`tel:${studentInfo.phone}`}
+                  className="block text-green-400 hover:text-green-300 text-sm transition-colors"
+                >
+                  {studentInfo.phone}
+                </a>
+              </CardContent>
+            </Card>
+
+            {/* Resume Download Card */}
+            <Card className="group bg-slate-800/60 backdrop-blur-sm border-orange-700/30 hover:border-orange-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-orange-900/20 scroll-reveal-scale stagger-6">
+              <CardContent className="p-6 text-center space-y-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-orange-500 to-orange-700 mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <Download className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-lg font-light text-white">Resume</h3>
+                <p className="text-sm text-blue-200/70">Download my CV</p>
+                <a 
+                  href={studentInfo.resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 text-sm transition-colors"
+                >
+                  Download PDF
+                  <Download className="w-4 h-4" />
+                </a>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 bg-blue-950 text-blue-100 border-t border-blue-900">
+      <footer className="py-8 px-6 bg-slate-950 border-t border-blue-900/30">
         <div className="max-w-7xl mx-auto text-center text-sm">
-          <p>&copy; 2024 {studentInfo.name}. All rights reserved.</p>
-          <p className="mt-2 text-blue-300">Cybersecurity Portfolio - Incident Response Specialist</p>
+          <p className="text-blue-300">&copy; 2024 {studentInfo.name}. All rights reserved.</p>
+          <p className="mt-2 text-blue-400/60">Cybersecurity Professional | VAPT & SOC Specialist</p>
         </div>
       </footer>
     </div>);
