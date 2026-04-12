@@ -1,34 +1,29 @@
 export const studentInfo = {
-  name: "Alex Chen",
-  title: "Cybersecurity Analyst & Incident Response Specialist",
-  bio: "Passionate about digital forensics and incident response. Specialized in threat hunting, malware analysis, and building resilient security operations.",
-  email: "alex.chen@example.com",
-  linkedin: "https://linkedin.com/in/alexchen",
-  github: "https://github.com/alexchen",
-  resumeUrl: "/downloads/resume.pdf"
+  name: "Sanjeev Kumar",
+  title: "Cybersecurity Professional | VAPT & SOC Specialist",
+  bio: "Cybersecurity professional specializing in Vulnerability Assessment & Penetration Testing (VAPT) and Security Operations, with proven hands-on experience in detecting, analyzing, and exploiting security weaknesses across corporate environments and real-world lab simulations.",
+  email: "sanjeevkumar25857@gmail.com",
+  phone: "+91 78768-21051",
+  linkedin: "https://linkedin.com/in/sanjeevkumar",
+  github: "https://github.com/sanjeevkumar",
+  tryhackme: "https://tryhackme.com/p/sanjeevkumar",
+  resumeUrl: "/downloads/Sanjeev-Kumar-Resume.pdf"
 };
 
 export const experiences = [
   {
     id: 1,
-    year: "2024",
-    role: "Security Operations Intern",
-    company: "CyberDefense Corp",
-    description: "Monitored SIEM alerts, investigated security incidents, and conducted threat intelligence analysis. Reduced false positive rate by 35%."
+    year: "2024-25",
+    role: "Cyber Security Intern",
+    company: "AMAHA (innerHour)",
+    description: "Conducted penetration testing on web applications and APIs, identifying 20+ vulnerabilities (5 critical). Managed VPN infrastructure for 400+ employees and implemented Cloudflare CDN, reducing web-based attacks by ~30%. Led bug bounty triage (35+ reports) and triaged 30+ security alerts, performing phishing and malware analysis."
   },
   {
     id: 2,
-    year: "2023",
-    role: "SOC Analyst Trainee",
-    company: "SecureNet Solutions",
-    description: "Assisted in incident response procedures, performed log analysis, and documented security events. Participated in 15+ incident investigations."
-  },
-  {
-    id: 3,
-    year: "2022",
-    role: "Cybersecurity Research Assistant",
-    company: "University Security Lab",
-    description: "Researched emerging threats, analyzed malware samples, and contributed to security awareness programs."
+    year: "2024",
+    role: "VAPT Intern",
+    company: "SECURE SLEUTHS",
+    description: "Performed VAPT on web applications, APIs, and network infrastructure for 5+ clients, identifying 25+ vulnerabilities. Analyzed and validated vulnerabilities (SQLI, XSS, CSRF) using Burp Suite, OWASP ZAP, Metasploit, and Nmap, improving accuracy and reducing false positives."
   }
 ];
 
