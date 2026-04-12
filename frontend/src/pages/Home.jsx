@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Shield, Mail, Linkedin, Github, Download,
-  Network, Brain, Database, HardDrive, Globe, Box, Search,
-  ChevronRight, Calendar, MapPin, Briefcase, Award } from
-'lucide-react';
+import { 
+  Shield, Mail, Linkedin, Github, Download, 
+  Network, Brain, Database, HardDrive, Globe, Box, Search, 
+  ChevronRight, Calendar, MapPin, Briefcase, Award, Clock
+} from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -312,6 +312,12 @@ const Home = () => {
                         #{tag.toLowerCase().replace(/\s+/g, '')}
                       </span>
                     ))}
+                    {!project.tags && (
+                      <>
+                        <span className="text-xs text-blue-400/70">#incident</span>
+                        <span className="text-xs text-blue-400/70">#response</span>
+                      </>
+                    )}
                   </div>
 
                   {/* Read Article Link */}
