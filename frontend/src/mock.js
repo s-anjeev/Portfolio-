@@ -36,44 +36,141 @@ export const projects = [
     summary: "Complete forensic investigation of a ransomware attack affecting corporate infrastructure.",
     date: "December 2024",
     severity: "Critical",
-    detailedReport: {
-      executiveSummary: "On December 15, 2024, our organization detected suspicious encryption activity across multiple file servers. Investigation revealed a sophisticated ransomware attack using a variant of LockBit 3.0. The incident was contained within 4 hours, with no data exfiltration confirmed.",
-      timeline: [
-        { time: "09:15 AM", event: "Initial detection - Multiple users reported inability to access files", status: "detected" },
-        { time: "09:30 AM", event: "Security team initiated incident response protocol", status: "responded" },
-        { time: "09:45 AM", event: "Affected systems isolated from network", status: "contained" },
-        { time: "10:30 AM", event: "Ransomware variant identified as LockBit 3.0", status: "analyzed" },
-        { time: "11:00 AM", event: "Backup restoration initiated", status: "recovery" },
-        { time: "01:15 PM", event: "All critical systems restored and verified", status: "resolved" }
-      ],
-      findings: [
-        {
-          title: "Initial Access Vector",
-          description: "Attackers gained access through a phishing email containing a malicious attachment sent to the HR department.",
-          severity: "high",
-          evidence: "Email logs, attachment hash: 7a3f5e9c..."
+    socReport: {
+      detection: {
+        summary: "On December 15, 2024 at 09:15 AM, our SOC detected anomalous encryption activity across multiple file servers through SIEM correlation rules.",
+        alertSource: "SIEM - File Integrity Monitoring (FIM) + EDR Alerts",
+        initialIndicators: [
+          "Mass file modifications across 5 file servers (3,247 files affected)",
+          "Unusual process spawning (suspicious executable in %TEMP% directory)",
+          "Spike in SMB traffic from compromised user workstation",
+          "Multiple users reporting inability to access network shares"
+        ],
+        mitreAttack: ["T1486 - Data Encrypted for Impact", "T1059 - Command and Scripting Interpreter"],
+        killChainPhase: "Actions on Objectives"
+      },
+      investigation: {
+        summary: "Deep-dive forensic analysis revealed a LockBit 3.0 ransomware variant delivered via spear-phishing campaign targeting HR department.",
+        rootCause: "Phishing email with malicious macro-enabled Excel attachment bypassed email gateway filters. User executed macro, downloading ransomware payload.",
+        timeline: [
+          { time: "09:15 AM", event: "Initial SIEM alert - Mass file encryption detected", phase: "Detection" },
+          { time: "09:30 AM", event: "IR team activated, affected systems isolated", phase: "Containment" },
+          { time: "09:45 AM", event: "Memory dump collected from patient zero workstation", phase: "Forensics" },
+          { time: "10:30 AM", event: "Ransomware variant identified as LockBit 3.0 via YARA rules", phase: "Analysis" },
+          { time: "11:00 AM", event: "Lateral movement vector identified (compromised admin credentials)", phase: "Analysis" },
+          { time: "11:45 AM", event: "All IOCs extracted and threat hunting initiated network-wide", phase: "Threat Hunting" }
+        ],
+        forensicFindings: [
+          {
+            title: "Initial Access Vector",
+            description: "Phishing email delivered to HR inbox with malicious Excel attachment (Invoice_2024.xlsm). Macro executed PowerShell script downloading ransomware from hxxp://185[.]220[.]101[.]42/payload.exe",
+            evidence: "Email logs, attachment hash: 7a3f5e9c2b1d..., PowerShell logs (Event ID 4104)",
+            mitreAttack: "T1566.001 - Spearphishing Attachment"
+          },
+          {
+            title: "Privilege Escalation & Lateral Movement",
+            description: "Attackers leveraged compromised credentials (HR manager account) to authenticate to domain controller, then moved laterally via SMB to file servers.",
+            evidence: "Windows Event Logs (Event ID 4624 - Logon Type 3, Event ID 4672 - Special Logon), Kerberos ticket analysis",
+            mitreAttack: "T1078 - Valid Accounts, T1021.002 - SMB/Windows Admin Shares"
+          },
+          {
+            title: "Encryption Execution",
+            description: "Ransomware encrypted 3,247 files across 5 file servers using AES-256 encryption. Ransom note dropped in each directory: README_RESTORE.txt",
+            evidence: "File system analysis, MFT timeline, encryption markers, ransom note analysis",
+            mitreAttack: "T1486 - Data Encrypted for Impact"
+          }
+        ],
+        toolsUsed: ["Splunk SIEM", "Volatility (Memory Forensics)", "FTK Imager", "Wireshark", "YARA", "CrowdStrike Falcon EDR"]
+      },
+      impact: {
+        severity: "Critical",
+        scope: {
+          affectedSystems: "5 file servers, 1 workstation (patient zero), 247 user accounts affected",
+          dataLoss: "No data exfiltration confirmed. 3,247 files encrypted (100% recovered from backups)",
+          downtime: "4 hours total - File server unavailability from 09:15 AM to 01:15 PM",
+          businessImpact: "Minimal - Operations continued with degraded file access. No customer-facing impact."
         },
-        {
-          title: "Lateral Movement",
-          description: "Compromised credentials were used to access file servers via SMB protocol.",
-          severity: "high",
-          evidence: "Windows Event Logs (Event ID 4624, 4672)"
-        },
-        {
-          title: "Encryption Process",
-          description: "Ransomware encrypted 3,247 files across 5 file servers using AES-256.",
-          severity: "critical",
-          evidence: "File system analysis, encryption markers"
-        }
-      ],
-      recommendations: [
-        "Implement email filtering with advanced threat protection",
-        "Enable MFA for all administrative accounts",
-        "Conduct security awareness training focusing on phishing",
-        "Implement network segmentation to limit lateral movement",
-        "Enhance backup procedures with offline storage"
-      ],
-      toolsUsed: ["Wireshark", "Volatility", "SIEM", "FTK Imager"]
+        affectedAssets: [
+          "FILESRV-01 through FILESRV-05 (Windows Server 2019)",
+          "HR-WORKSTATION-42 (Patient Zero)",
+          "Domain: CORP.LOCAL (admin credentials compromised)"
+        ],
+        estimatedCost: "$45,000 (incident response labor, backup restoration, 4 hours productivity loss)"
+      },
+      response: {
+        containment: [
+          "Immediately isolated affected file servers from network (09:30 AM)",
+          "Disabled compromised HR manager account across all systems",
+          "Blocked malicious IP (185.220.101.42) at firewall and web proxy",
+          "Quarantined patient zero workstation for forensic imaging"
+        ],
+        eradication: [
+          "Removed ransomware artifacts from all affected systems",
+          "Reset passwords for all privileged accounts (200+ accounts)",
+          "Rebuilt patient zero workstation from gold image",
+          "Deployed updated EDR signatures for LockBit 3.0 variant"
+        ],
+        recovery: [
+          "Restored 3,247 encrypted files from backup (verified integrity: 100%)",
+          "File servers brought back online at 01:15 PM (verified clean)",
+          "Conducted post-recovery integrity checks via file hashing",
+          "Monitored for 72 hours post-incident - no reinfection detected"
+        ],
+        communication: [
+          "Notified executive leadership within 30 minutes of detection",
+          "Coordinated with Legal and Compliance teams (no breach notification required)",
+          "Sent company-wide security advisory on phishing awareness",
+          "Briefed IT staff on IOCs and defensive measures implemented"
+        ]
+      },
+      lessonsLearned: {
+        whatWorkedWell: [
+          "SIEM detection rules triggered within minutes of encryption activity",
+          "Incident response team mobilized rapidly (15-minute response time)",
+          "Backup strategy proved effective - 100% data recovery with no loss",
+          "Network segmentation limited ransomware spread to file servers only"
+        ],
+        areasForImprovement: [
+          "Email gateway failed to detect malicious macro - needs tuning",
+          "Privileged account credentials stored in browser on user workstation",
+          "Lack of MFA on administrative accounts enabled lateral movement",
+          "EDR agent not installed on 2 of 5 file servers (visibility gap)"
+        ],
+        recommendations: [
+          {
+            priority: "Critical",
+            action: "Implement MFA for all administrative and privileged accounts",
+            owner: "IT Security Team",
+            timeline: "30 days"
+          },
+          {
+            priority: "High",
+            action: "Deploy advanced email threat protection (sandbox analysis for attachments)",
+            owner: "Email Security Team",
+            timeline: "60 days"
+          },
+          {
+            priority: "High",
+            action: "Conduct organization-wide phishing simulation and security awareness training",
+            owner: "Security Awareness Team",
+            timeline: "45 days"
+          },
+          {
+            priority: "Medium",
+            action: "Implement application whitelisting on all endpoints to prevent unauthorized executable execution",
+            owner: "Endpoint Security Team",
+            timeline: "90 days"
+          },
+          {
+            priority: "Medium",
+            action: "Enhance network segmentation - isolate file servers in dedicated VLAN with stricter access controls",
+            owner: "Network Team",
+            timeline: "90 days"
+          }
+        ],
+        mitreMapping: "This incident mapped to MITRE ATT&CK tactics: Initial Access (T1566), Execution (T1059), Privilege Escalation (T1078), Lateral Movement (T1021), Impact (T1486)",
+        killChainMapping: "Cyber Kill Chain phases observed: Delivery (phishing) → Exploitation (macro execution) → Installation (ransomware payload) → Command & Control (minimal) → Actions on Objectives (encryption)"
+      }
     }
   },
   {
