@@ -4,10 +4,10 @@ export const studentInfo = {
   bio: "Cybersecurity professional specializing in Vulnerability Assessment & Penetration Testing (VAPT) and Security Operations, with proven hands-on experience in detecting, analyzing, and exploiting security weaknesses across corporate environments and real-world lab simulations.",
   email: "sanjeevkumar25857@gmail.com",
   phone: "+91 78768-21051",
-  linkedin: "https://linkedin.com/in/sanjeevkumar",
-  github: "https://github.com/sanjeevkumar",
-  tryhackme: "https://tryhackme.com/p/sanjeevkumar",
-  resumeUrl: "/downloads/Sanjeev-Kumar-Resume.pdf"
+  linkedin: "https://www.linkedin.com/in/sanjeev-kumar-270b6321a/",
+  github: "https://github.com/s-anjeev",
+  tryhackme: "https://tryhackme.com/p/sanjeevkumar25857",
+  resumeUrl: "https://customer-assets.emergentagent.com/job_response-showcase/artifacts/kiyt4ww9_Sanjeev-kumar-SOC%20%282%29.pdf"
 };
 
 export const experiences = [
