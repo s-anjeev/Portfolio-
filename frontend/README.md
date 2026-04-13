@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+# Sanjeev Kumar - Cybersecurity Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive portfolio showcasing cybersecurity expertise, incident response projects, and technical skills.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Career Timeline** - Chronological journey from education to professional experience
+- **Incident Response & Writeups** - Detailed security projects and case studies
+- **Technical Arsenal** - Comprehensive skill showcase across 8 categories
+- **Contact Cards** - Easy ways to connect (LinkedIn, GitHub, TryHackMe, Email)
+- **Responsive Design** - Works perfectly on all devices
+- **Dark Theme** - Professional cybersecurity aesthetic
+- **Smooth Animations** - Engaging scroll-triggered effects
 
-### `npm start`
+## 🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React 19** - Modern UI framework
+- **React Router** - Client-side routing
+- **Tailwind CSS** - Utility-first styling
+- **Shadcn UI** - Beautiful component library
+- **Lucide Icons** - Clean, modern icons
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📦 Installation
 
-### `npm test`
+```bash
+# Install dependencies
+yarn install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Start development server
+yarn start
 
-### `npm run build`
+# Build for production
+yarn build
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🌐 Deployment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This is a **frontend-only** application with no backend dependencies. Deploy to:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Vercel (Recommended)
+```bash
+# Install Vercel CLI
+npm i -g vercel
 
-### `npm run eject`
+# Deploy
+vercel
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Netlify
+1. Connect your GitHub repository
+2. Build command: `yarn build`
+3. Publish directory: `build`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### GitHub Pages
+1. Update `package.json`: Add `"homepage": "https://yourusername.github.io/portfolio"`
+2. Build: `yarn build`
+3. Deploy using gh-pages package
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📁 Project Structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+src/
+├── pages/
+│   ├── Home.jsx              # Main landing page
+│   └── ProjectDetail.jsx     # Project writeup page
+├── components/ui/            # Shadcn UI components
+├── mock.js                   # All portfolio data (EDIT THIS!)
+├── App.js                    # Routes configuration
+├── App.css                   # Custom animations
+└── index.css                 # Global styles + Tailwind
+```
 
-## Learn More
+## ✏️ Customization
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Update Personal Information
+Edit `src/mock.js`:
+- `studentInfo` - Name, title, bio, contact links
+- `experiences` - Work history and internships
+- `projects` - Incident response cases and writeups
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Modify Colors
+Update Tailwind theme in `tailwind.config.js` or CSS variables in `index.css`
 
-### Code Splitting
+## 🎨 Design Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Color Scheme**: Dark blue/slate with cyan, orange, and purple accents
+- **Typography**: Ultra-light fonts for modern professional look
+- **Animations**: Scroll-triggered reveals, parallax, hover effects
+- **Accessibility**: Semantic HTML, keyboard navigation
 
-### Analyzing the Bundle Size
+## 📝 License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Personal portfolio - All rights reserved © 2024 Sanjeev Kumar
 
-### Making a Progressive Web App
+## 🤝 Connect
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **LinkedIn**: [sanjeev-kumar-270b6321a](https://www.linkedin.com/in/sanjeev-kumar-270b6321a/)
+- **GitHub**: [s-anjeev](https://github.com/s-anjeev)
+- **TryHackMe**: [sanjeevkumar25857](https://tryhackme.com/p/sanjeevkumar25857) - **Top 1%**
+- **Email**: sanjeevkumar25857@gmail.com

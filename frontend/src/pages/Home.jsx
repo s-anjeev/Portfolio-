@@ -68,11 +68,6 @@ const Home = () => {
     return <IconComponent className="w-8 h-8" />;
   };
 
-  const handleResumeDownload = () => {
-    // Mock download functionality
-    alert('Resume download feature - will be connected to actual file in backend');
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900">
       {/* Navigation */}
