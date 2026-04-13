@@ -147,35 +147,41 @@ const Home = () => {
             <div className="absolute left-[15px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-cyan-500/50 via-blue-500/30 to-transparent" />
             
             <div className="space-y-12">
-              {/* Education - Bottom/First */}
+              {/* Second Internship - AMAHA (Most Recent - TOP) */}
               <div className="relative scroll-reveal-left stagger-1">
-                {/* Timeline Dot */}
-                <div className="absolute left-0 top-6 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 ring-4 ring-slate-900 flex items-center justify-center">
-                  <Award className="w-4 h-4 text-white" />
+                {/* Timeline Dot - Glowing for current */}
+                <div className="absolute left-0 top-6 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 ring-4 ring-slate-900 flex items-center justify-center animate-pulse">
+                  <Shield className="w-4 h-4 text-white" />
                 </div>
                 
-                <div className="ml-16 bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-blue-700/30 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-900/20">
+                <div className="ml-16 bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/50 hover:border-cyan-400/70 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-900/30 group">
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <h3 className="text-xl font-light text-white mb-1">Bachelor of Computer Applications</h3>
-                      <p className="text-cyan-400 text-sm font-medium">Himachal Pradesh Technical University</p>
+                      <h3 className="text-xl font-light text-white mb-1">Cyber Security Intern</h3>
+                      <p className="text-cyan-400 text-sm font-medium">AMAHA (innerHour)</p>
                     </div>
-                    <Badge variant="outline" className="border-cyan-500/50 text-cyan-300 bg-cyan-950/30">
-                      Graduated
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/50">
+                      Nov 2024 - Feb 2025
                     </Badge>
                   </div>
-                  <p className="text-blue-200/70 text-sm leading-relaxed">
-                    Built strong foundations in networking, operating systems, web application security, and cloud computing that serve as the backbone of cybersecurity expertise.
+                  <p className="text-blue-200/70 text-sm leading-relaxed mb-3">
+                    Conducted penetration testing on web applications and APIs, identifying 20+ vulnerabilities (5 critical). Managed VPN infrastructure for 400+ employees and implemented Cloudflare CDN, reducing web-based attacks by ~30%. Led bug bounty triage (35+ reports) and OSINT investigations.
                   </p>
                   <div className="flex flex-wrap gap-2 mt-4">
-                    <Badge variant="outline" className="border-blue-500/30 text-blue-300 bg-blue-950/30 text-xs">
-                      Networking
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
+                      VAPT
                     </Badge>
-                    <Badge variant="outline" className="border-blue-500/30 text-blue-300 bg-blue-950/30 text-xs">
-                      Web Security
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
+                      Splunk
                     </Badge>
-                    <Badge variant="outline" className="border-blue-500/30 text-blue-300 bg-blue-950/30 text-xs">
-                      Cloud Computing
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
+                      Wazuh
+                    </Badge>
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
+                      Nessus
+                    </Badge>
+                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
+                      Burp Suite
                     </Badge>
                   </div>
                 </div>
@@ -221,41 +227,35 @@ const Home = () => {
                 </div>
               </div>
 
-              {/* Second Internship - AMAHA (Most Recent) */}
+              {/* Education - Bottom/Last */}
               <div className="relative scroll-reveal-left stagger-3">
-                {/* Timeline Dot - Glowing for current */}
-                <div className="absolute left-0 top-6 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 ring-4 ring-slate-900 flex items-center justify-center animate-pulse">
-                  <Shield className="w-4 h-4 text-white" />
+                {/* Timeline Dot */}
+                <div className="absolute left-0 top-6 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 ring-4 ring-slate-900 flex items-center justify-center">
+                  <Award className="w-4 h-4 text-white" />
                 </div>
                 
-                <div className="ml-16 bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/50 hover:border-cyan-400/70 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-900/30 group">
+                <div className="ml-16 bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-blue-700/30 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-900/20">
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <h3 className="text-xl font-light text-white mb-1">Cyber Security Intern</h3>
-                      <p className="text-cyan-400 text-sm font-medium">AMAHA (innerHour)</p>
+                      <h3 className="text-xl font-light text-white mb-1">Bachelor of Computer Applications</h3>
+                      <p className="text-cyan-400 text-sm font-medium">Himachal Pradesh Technical University</p>
                     </div>
-                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/50">
-                      Nov 2024 - Feb 2025
+                    <Badge variant="outline" className="border-cyan-500/50 text-cyan-300 bg-cyan-950/30">
+                      Graduated
                     </Badge>
                   </div>
-                  <p className="text-blue-200/70 text-sm leading-relaxed mb-3">
-                    Conducted penetration testing on web applications and APIs, identifying 20+ vulnerabilities (5 critical). Managed VPN infrastructure for 400+ employees and implemented Cloudflare CDN, reducing web-based attacks by ~30%. Led bug bounty triage (35+ reports) and OSINT investigations.
+                  <p className="text-blue-200/70 text-sm leading-relaxed">
+                    Built strong foundations in networking, operating systems, web application security, and cloud computing that serve as the backbone of cybersecurity expertise.
                   </p>
                   <div className="flex flex-wrap gap-2 mt-4">
-                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
-                      VAPT
+                    <Badge variant="outline" className="border-blue-500/30 text-blue-300 bg-blue-950/30 text-xs">
+                      Networking
                     </Badge>
-                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
-                      Splunk
+                    <Badge variant="outline" className="border-blue-500/30 text-blue-300 bg-blue-950/30 text-xs">
+                      Web Security
                     </Badge>
-                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
-                      Wazuh
-                    </Badge>
-                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
-                      Nessus
-                    </Badge>
-                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/30 text-xs">
-                      Burp Suite
+                    <Badge variant="outline" className="border-blue-500/30 text-blue-300 bg-blue-950/30 text-xs">
+                      Cloud Computing
                     </Badge>
                   </div>
                 </div>
@@ -360,18 +360,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Splunk</span>
-                    <Badge variant="outline" className="border-cyan-500/50 text-cyan-300 bg-cyan-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Wazuh</span>
-                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/20 text-xs">Intermediate</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">ELK Stack</span>
-                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 bg-cyan-950/20 text-xs">Intermediate</Badge>
-                  </div>
+                  <div className="text-sm text-blue-200">Splunk</div>
+                  <div className="text-sm text-blue-200">Wazuh</div>
+                  <div className="text-sm text-blue-200">ELK Stack</div>
                 </div>
                 <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Alert triage, rule tuning, IOC correlation</p>
               </CardContent>
@@ -390,22 +381,10 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Burp Suite</span>
-                    <Badge variant="outline" className="border-orange-500/50 text-orange-300 bg-orange-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">OWASP ZAP</span>
-                    <Badge variant="outline" className="border-orange-500/50 text-orange-300 bg-orange-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Nmap</span>
-                    <Badge variant="outline" className="border-orange-500/50 text-orange-300 bg-orange-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Nessus</span>
-                    <Badge variant="outline" className="border-orange-500/30 text-orange-300 bg-orange-950/20 text-xs">Intermediate</Badge>
-                  </div>
+                  <div className="text-sm text-blue-200">Burp Suite</div>
+                  <div className="text-sm text-blue-200">OWASP ZAP</div>
+                  <div className="text-sm text-blue-200">Nmap</div>
+                  <div className="text-sm text-blue-200">Nessus</div>
                 </div>
                 <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Web app testing, API security, network scanning</p>
               </CardContent>
@@ -424,18 +403,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Metasploit</span>
-                    <Badge variant="outline" className="border-red-500/50 text-red-300 bg-red-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Kali Linux</span>
-                    <Badge variant="outline" className="border-red-500/50 text-red-300 bg-red-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Burp Suite</span>
-                    <Badge variant="outline" className="border-red-500/50 text-red-300 bg-red-950/30 text-xs">Advanced</Badge>
-                  </div>
+                  <div className="text-sm text-blue-200">Metasploit</div>
+                  <div className="text-sm text-blue-200">Kali Linux</div>
+                  <div className="text-sm text-blue-200">Burp Suite</div>
                 </div>
                 <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Exploitation, privilege escalation, post-exploitation</p>
               </CardContent>
@@ -454,18 +424,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Wireshark</span>
-                    <Badge variant="outline" className="border-blue-500/50 text-blue-300 bg-blue-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">TCP/IP</span>
-                    <Badge variant="outline" className="border-blue-500/50 text-blue-300 bg-blue-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">DNS</span>
-                    <Badge variant="outline" className="border-blue-500/30 text-blue-300 bg-blue-950/20 text-xs">Intermediate</Badge>
-                  </div>
+                  <div className="text-sm text-blue-200">Wireshark</div>
+                  <div className="text-sm text-blue-200">TCP/IP</div>
+                  <div className="text-sm text-blue-200">DNS</div>
                 </div>
                 <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Packet analysis, traffic inspection, protocol forensics</p>
               </CardContent>
@@ -484,18 +445,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">MITRE ATT&CK</span>
-                    <Badge variant="outline" className="border-purple-500/50 text-purple-300 bg-purple-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">OSINT Tools</span>
-                    <Badge variant="outline" className="border-purple-500/50 text-purple-300 bg-purple-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">VirusTotal</span>
-                    <Badge variant="outline" className="border-purple-500/30 text-purple-300 bg-purple-950/20 text-xs">Intermediate</Badge>
-                  </div>
+                  <div className="text-sm text-blue-200">MITRE ATT&CK</div>
+                  <div className="text-sm text-blue-200">OSINT Tools</div>
+                  <div className="text-sm text-blue-200">VirusTotal</div>
                 </div>
                 <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Threat modeling, attack pattern analysis, IOC identification</p>
               </CardContent>
@@ -514,18 +466,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Alert Triage</span>
-                    <Badge variant="outline" className="border-yellow-500/50 text-yellow-300 bg-yellow-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Malware Analysis</span>
-                    <Badge variant="outline" className="border-yellow-500/30 text-yellow-300 bg-yellow-950/20 text-xs">Intermediate</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Forensics</span>
-                    <Badge variant="outline" className="border-yellow-500/30 text-yellow-300 bg-yellow-950/20 text-xs">Intermediate</Badge>
-                  </div>
+                  <div className="text-sm text-blue-200">Alert Triage</div>
+                  <div className="text-sm text-blue-200">Malware Analysis</div>
+                  <div className="text-sm text-blue-200">Forensics</div>
                 </div>
                 <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Security alert handling, incident investigation, root cause analysis</p>
               </CardContent>
@@ -544,18 +487,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Python</span>
-                    <Badge variant="outline" className="border-green-500/50 text-green-300 bg-green-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Bash</span>
-                    <Badge variant="outline" className="border-green-500/30 text-green-300 bg-green-950/20 text-xs">Intermediate</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">PowerShell</span>
-                    <Badge variant="outline" className="border-green-500/20 text-green-300 bg-green-950/10 text-xs">Beginner</Badge>
-                  </div>
+                  <div className="text-sm text-blue-200">Python</div>
+                  <div className="text-sm text-blue-200">Bash</div>
+                  <div className="text-sm text-blue-200">PowerShell</div>
                 </div>
                 <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Security automation, custom tools, log parsing</p>
               </CardContent>
@@ -574,18 +508,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">Cloudflare</span>
-                    <Badge variant="outline" className="border-indigo-500/50 text-indigo-300 bg-indigo-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">VPN Management</span>
-                    <Badge variant="outline" className="border-indigo-500/50 text-indigo-300 bg-indigo-950/30 text-xs">Advanced</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-200">CDN Security</span>
-                    <Badge variant="outline" className="border-indigo-500/30 text-indigo-300 bg-indigo-950/20 text-xs">Intermediate</Badge>
-                  </div>
+                  <div className="text-sm text-blue-200">Cloudflare</div>
+                  <div className="text-sm text-blue-200">VPN Management</div>
+                  <div className="text-sm text-blue-200">CDN Security</div>
                 </div>
                 <p className="text-xs text-blue-300/60 mt-4 leading-relaxed">Cloud security posture, CDN hardening, DDoS mitigation</p>
               </CardContent>
