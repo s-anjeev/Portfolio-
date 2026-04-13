@@ -80,15 +80,20 @@ const Home = () => {
             <a href="#projects" className="text-sm text-blue-200 hover:text-white hover:translate-y-[-2px] transition-all duration-200">Work</a>
             <a href="#tools" className="text-sm text-blue-200 hover:text-white hover:translate-y-[-2px] transition-all duration-200">Tools</a>
             <a href="#contact" className="text-sm text-blue-200 hover:text-white hover:translate-y-[-2px] transition-all duration-200">Contact</a>
-            <Button
-              onClick={handleResumeDownload}
-              variant="outline"
-              size="sm"
-              className="border-blue-400 text-blue-200 hover:bg-blue-500 hover:text-white hover:scale-105 transition-all duration-200">
-
-              <Download className="w-4 h-4 mr-2" />
-              Resume
-            </Button>
+            <a 
+              href={studentInfo.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-blue-400 text-blue-200 hover:bg-blue-500 hover:text-white hover:scale-105 transition-all duration-200"
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Resume
+              </Button>
+            </a>
           </div>
         </div>
       </nav>
