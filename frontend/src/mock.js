@@ -30,6 +30,187 @@ export const experiences = [
 export const projects = [
   {
     id: 1,
+    title: "AWS Phishing Campaign - Email Security Investigation",
+    category: "Email Security",
+    thumbnail: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop",
+    summary: "First-ever email analysis investigating AWS Free Tier spoofed alert with malicious executable attachment delivered via anonymous mailer.",
+    date: "February 2026",
+    severity: "High",
+    socReport: {
+      detection: {
+        summary: "On February 28, 2026 at 06:20 UTC, a sophisticated phishing email impersonating AWS Free Tier alert was detected in user inbox. Spoofed sender used emkei.cz anonymous mailer with executable disguised as PDF billing receipt.",
+        alertSource: "Proton Mail Spam Filter (Score: 101/100) + Manual User Report",
+        initialIndicators: [
+          "SPF/DKIM/DMARC authentication failures (all 3 failed)",
+          "Suspicious attachment: AWS_Billing_receipt.pdf.exe (PE32 executable)",
+          "Reply-To mismatch: bobtheattacker@proton.me (not AWS domain)",
+          "Origin from emkei.cz [114.29.236.247] - known anonymous mail relay",
+          "Message-ID domain (emkei.cz) diverges from claimed sender (amazonaws.com)"
+        ],
+        mitreAttack: [
+          "T1566.001 - Spearphishing Attachment",
+          "T1204.002 - User Execution: Malicious File",
+          "T1036.007 - Masquerading: Double File Extension"
+        ],
+        killChainPhase: "Delivery (Weaponization complete, Exploitation blocked)"
+      },
+      investigation: {
+        summary: "Deep email forensics analysis using header inspection, authentication validation (SPF/DKIM/DMARC), body analysis, and attachment examination. Phishing email originated from emkei.cz anonymous relay service, spoofing AWS infrastructure to deliver Windows malware disguised as PDF.",
+        rootCause: "Attacker leveraged emkei.cz public anonymous mailer to spoof AWS Free Tier alert. Email authentication bypass attempt using subdomain spoofing (costalerts.amazonaws.com - non-existent AWS subdomain). Double-extension technique used to disguise PE32 executable as PDF document.",
+        timeline: [
+          { time: "06:20:23 UTC", event: "Phishing email delivered to alicethevictim@proton.me from emkei.cz [114.29.236.247]", phase: "Detection" },
+          { time: "06:25:00 UTC", event: "L1 SOC analyst initiated investigation - email artifact loaded for triage", phase: "Triage" },
+          { time: "06:28:00 UTC", event: "Email header analysis complete - all authentication checks failed (SPF/DKIM/DMARC)", phase: "Analysis" },
+          { time: "06:33:00 UTC", event: "HTML body decoded - impersonation technique documented, legitimate AWS logo fetched from CDN", phase: "Analysis" },
+          { time: "06:40:00 UTC", event: "Attachment identified as PE32 executable (not PDF) - MZ magic bytes confirmed", phase: "Forensics" },
+          { time: "06:45:00 UTC", event: "IOCs extracted (file hashes, attacker email, relay IP) - escalated to L2 for malware analysis", phase: "Escalation" }
+        ],
+        forensicFindings: [
+          {
+            title: "Email Header Analysis - Domain Spoofing",
+            description: "From header claims 'freetier@costalerts.amazonaws.com' but Message-ID reveals origin: emkei.cz. Subdomain 'costalerts' is fabricated - AWS billing alerts originate from @aws.amazon.com or @amazon.com, not costalerts subdomain. Return-Path spoofed to match From address.",
+            evidence: "Message-ID: <20260228062015.B553193F@emkei.cz>, From: freetier@costalerts.amazonaws.com, Received: from emkei.cz [114.29.236.247]",
+            mitreAttack: "T1598.003 - Phishing for Information (Email Spoofing)"
+          },
+          {
+            title: "Email Authentication Failures - SPF/DKIM/DMARC",
+            description: "SPF: NONE/FAIL - Origin IP 114.29.236.247 (emkei.cz) not authorized sender for amazonaws.com. DKIM: NONE - No signature present, message integrity unverifiable. DMARC: FAIL (p=quarantine) - Both SPF and DKIM alignment failed, confirming domain spoofing.",
+            evidence: "Authentication-Results: spf=none smtp.mailfrom=costalerts.amazonaws.com; dkim=none; dmarc=fail (p=quarantine dis=none)",
+            mitreAttack: "T1071.003 - Application Layer Protocol: Mail Protocols"
+          },
+          {
+            title: "Reply-To Hijacking - Credential Collection Tactic",
+            description: "Reply-To explicitly set to 'bobtheattacker@proton.me' - attacker-controlled Proton Mail inbox. Any victim reply with credentials goes directly to attacker, bypassing network-layer detection. Low-tech exfiltration method that evades URL scanners.",
+            evidence: "Reply-To: bobtheattacker@proton.me (diverges from From: amazonaws.com), X-Spam-Score: 101",
+            mitreAttack: "T1078 - Valid Accounts (AWS Credential Targeting)"
+          },
+          {
+            title: "Social Engineering - Fabricated AWS Account Data",
+            description: "HTML body contained realistic AWS Free Tier usage data: Account ID 533261676, 85% usage threshold, EC2 644.73 hrs, VPC 646 hrs. Genuine AWS logo fetched from legitimate CDN (d1.awsstatic.com). Financial anxiety trigger (overage implies unexpected charges) reduces victim's critical thinking.",
+            evidence: "HTML body analysis, AWS logo URL: https://d1.awsstatic.com/logos/aws-logo-square-300.png, Call-to-action links to real https://aws.amazon.com/console/",
+            mitreAttack: "T1566 - Phishing (Social Engineering)"
+          },
+          {
+            title: "Malicious Attachment - Double Extension Masquerade",
+            description: "Attachment 'AWS_Billing_receipt.pdf.exe' identified as PE32 executable (console) Intel 80386, compiled with MinGW GCC. Windows hides '.exe' extension by default, displaying as 'AWS_Billing_receipt.pdf' to unprepared users. MZ magic bytes (4D 5A 90 00) confirm Windows PE format, not PDF.",
+            evidence: "SHA-256: e444306db6a33902958eabc0c0db7b4e05cd756834cd6cff7923ce930972140d, MD5: 428ecfdddcccc962a2cd9ca317da94da, File Type: PE32 executable, MIME: application/x-msdownload, Size: 41.2 KB",
+            mitreAttack: "T1036.007 - Masquerading: Double File Extension"
+          }
+        ],
+        toolsUsed: [
+          "Email Header Analyzer",
+          "SPF Record Checker",
+          "DKIM Validator",
+          "DMARC Policy Analyzer",
+          "PhishTool (Email Forensics Platform)",
+          "Base64 Decoder (HTML Body Analysis)",
+          "File Magic Bytes Inspector",
+          "SHA-256/MD5 Hash Generator",
+          "WHOIS Lookup (emkei.cz)",
+          "Proton Mail Webmail Interface"
+        ]
+      },
+      impact: {
+        severity: "High",
+        scope: {
+          affectedSystems: "1 user email account (alicethevictim@proton.me) - no execution occurred, attachment not opened",
+          dataLoss: "No data exfiltration - user did not reply or execute attachment. Potential AWS credential theft blocked.",
+          downtime: "0 minutes - proactive detection prevented compromise",
+          businessImpact: "Minimal - Single targeted user, no credential compromise, no AWS account access. High potential impact if executed (account takeover, resource abuse, unexpected billing)."
+        },
+        affectedAssets: [
+          "Email Account: alicethevictim@proton.me",
+          "Target Platform: AWS Free Tier Account (ID: 533261676 - fabricated)",
+          "Credential Store: ~/.aws/credentials (targeted for exfiltration if malware executed)"
+        ],
+        estimatedCost: "$0 (incident blocked) | Potential: $5,000+ (AWS resource abuse if account compromised)"
+      },
+      response: {
+        containment: [
+          "Quarantined phishing email in Proton Mail - moved to spam folder immediately",
+          "Blocked sender domain 'emkei.cz' at mail gateway level (expected IP rotation - domain block more durable)",
+          "Flagged attacker email 'bobtheattacker@proton.me' as known malicious actor across mail platforms",
+          "Added attachment SHA-256 hash to email gateway attachment filter deny list"
+        ],
+        eradication: [
+          "Deleted malicious email from user inbox after IOC extraction",
+          "Pushed file hash (SHA-256: e444306d..., MD5: 428ecfdd...) to EDR endpoint deny list",
+          "Removed any cached copies of attachment from email client",
+          "Verified no execution occurred via process logs and file access logs"
+        ],
+        recovery: [
+          "User account verified clean - no compromise detected",
+          "No AWS credential reset required (credentials never exposed)",
+          "Email filtering rules updated to catch similar patterns",
+          "User informed and provided phishing awareness guidance"
+        ],
+        communication: [
+          "Notified user (alicethevictim) within 25 minutes of detection - explained phishing tactic",
+          "Security advisory sent to IT team highlighting emkei.cz anonymous relay abuse",
+          "IOCs shared with email gateway admin for filter tuning",
+          "L2 malware analysis team briefed on PE32 executable for sandboxing (escalated at +25 min)"
+        ]
+      },
+      lessonsLearned: {
+        whatWorkedWell: [
+          "Proton Mail spam filter scored email 101/100 - correctly flagged as suspicious",
+          "User reported suspicious email instead of clicking - security awareness training effective",
+          "Rapid L1 triage (5 min response time) prevented potential compromise",
+          "Email header analysis immediately identified anonymous relay origin (emkei.cz Message-ID)",
+          "Comprehensive IOC extraction (hashes, IPs, emails) completed within 20 minutes"
+        ],
+        areasForImprovement: [
+          "Spam filter routed flagged email to inbox despite 101/100 score - threshold may need adjustment",
+          "No automatic quarantine of emails from known anonymous relay services (emkei.cz, guerrillamail, etc.)",
+          "Email gateway lacked Reply-To mismatch detection rule (From domain vs Reply-To domain divergence)",
+          "No attachment sandboxing before delivery - double-extension executables should auto-quarantine",
+          "DMARC policy on amazonaws.com is 'quarantine' not 'reject' - allows some spoofed emails through"
+        ],
+        recommendations: [
+          {
+            priority: "Critical",
+            action: "Implement automatic quarantine for emails from anonymous relay services (emkei.cz, guerrillamail, etc.) at mail gateway",
+            owner: "Email Security Team",
+            timeline: "7 days"
+          },
+          {
+            priority: "Critical",
+            action: "Deploy SIEM rule: Alert when Reply-To domain differs from From domain AND attachment contains .exe extension (double-extension pattern)",
+            owner: "SOC Team",
+            timeline: "14 days"
+          },
+          {
+            priority: "High",
+            action: "Enable attachment sandboxing for all executables (.exe, .scr, .bat, .ps1) before inbox delivery",
+            owner: "Email Gateway Admin",
+            timeline: "30 days"
+          },
+          {
+            priority: "High",
+            action: "Tune Proton Mail spam filter - auto-quarantine any email scoring >100 instead of routing to inbox",
+            owner: "Mail Platform Admin",
+            timeline: "14 days"
+          },
+          {
+            priority: "Medium",
+            action: "User security awareness campaign: AWS never sends billing documents as executable attachments - always access console via bookmarked URL",
+            owner: "Security Awareness Team",
+            timeline: "30 days"
+          },
+          {
+            priority: "Medium",
+            action: "Block known anonymous mailer IP ranges at perimeter firewall (114.29.236.0/24 for emkei.cz)",
+            owner: "Network Security Team",
+            timeline: "45 days"
+          }
+        ],
+        mitreMapping: "This incident mapped to MITRE ATT&CK tactics: Initial Access (T1566 - Phishing), Execution (T1204 - User Execution - blocked), Defense Evasion (T1036 - Masquerading via double extension), Collection (T1078 - Valid Accounts targeting), Command & Control (T1071 - Mail Protocols via Reply-To hijack)",
+        killChainMapping: "Cyber Kill Chain phases observed: Reconnaissance (AWS Free Tier user profiling) → Weaponization (PE32 compiled, double extension applied) → Delivery (spoofed email via emkei.cz) → Exploitation (BLOCKED - user did not execute) → Installation (BLOCKED) → C2 (Reply-To hijack ready but not triggered) → Actions on Objectives (AWS credential theft intended but not achieved)"
+      }
+    }
+  },
+  {
+    id: 2,
     title: "Ransomware Attack Investigation",
     category: "Incident Response",
     thumbnail: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop",
@@ -174,7 +355,7 @@ export const projects = [
     }
   },
   {
-    id: 2,
+    id: 3,
     title: "Advanced Persistent Threat Detection",
     category: "Threat Hunting",
     thumbnail: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop",
@@ -221,7 +402,7 @@ export const projects = [
     }
   },
   {
-    id: 3,
+    id: 4,
     title: "Insider Threat Investigation",
     category: "Digital Forensics",
     thumbnail: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop",
@@ -268,7 +449,7 @@ export const projects = [
     }
   },
   {
-    id: 4,
+    id: 5,
     title: "Phishing Campaign Analysis",
     category: "Email Security",
     thumbnail: "https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=800&h=600&fit=crop",
@@ -315,7 +496,7 @@ export const projects = [
     }
   },
   {
-    id: 5,
+    id: 6,
     title: "Web Application Breach",
     category: "Application Security",
     thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop",
@@ -364,7 +545,7 @@ export const projects = [
     }
   },
   {
-    id: 6,
+    id: 7,
     title: "Malware Outbreak Response",
     category: "Malware Analysis",
     thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
