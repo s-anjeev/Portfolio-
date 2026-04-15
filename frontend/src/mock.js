@@ -166,44 +166,6 @@ export const projects = [
           "No attachment sandboxing before delivery - double-extension executables should auto-quarantine",
           "DMARC policy on amazonaws.com is 'quarantine' not 'reject' - allows some spoofed emails through"
         ],
-        recommendations: [
-          {
-            priority: "Critical",
-            action: "Implement automatic quarantine for emails from anonymous relay services (emkei.cz, guerrillamail, etc.) at mail gateway",
-            owner: "Email Security Team",
-            timeline: "7 days"
-          },
-          {
-            priority: "Critical",
-            action: "Deploy SIEM rule: Alert when Reply-To domain differs from From domain AND attachment contains .exe extension (double-extension pattern)",
-            owner: "SOC Team",
-            timeline: "14 days"
-          },
-          {
-            priority: "High",
-            action: "Enable attachment sandboxing for all executables (.exe, .scr, .bat, .ps1) before inbox delivery",
-            owner: "Email Gateway Admin",
-            timeline: "30 days"
-          },
-          {
-            priority: "High",
-            action: "Tune Proton Mail spam filter - auto-quarantine any email scoring >100 instead of routing to inbox",
-            owner: "Mail Platform Admin",
-            timeline: "14 days"
-          },
-          {
-            priority: "Medium",
-            action: "User security awareness campaign: AWS never sends billing documents as executable attachments - always access console via bookmarked URL",
-            owner: "Security Awareness Team",
-            timeline: "30 days"
-          },
-          {
-            priority: "Medium",
-            action: "Block known anonymous mailer IP ranges at perimeter firewall (114.29.236.0/24 for emkei.cz)",
-            owner: "Network Security Team",
-            timeline: "45 days"
-          }
-        ],
         mitreMapping: "This incident mapped to MITRE ATT&CK tactics: Initial Access (T1566 - Phishing), Execution (T1204 - User Execution - blocked), Defense Evasion (T1036 - Masquerading via double extension), Collection (T1078 - Valid Accounts targeting), Command & Control (T1071 - Mail Protocols via Reply-To hijack)",
         killChainMapping: "Cyber Kill Chain phases observed: Reconnaissance (AWS Free Tier user profiling) → Weaponization (PE32 compiled, double extension applied) → Delivery (spoofed email via emkei.cz) → Exploitation (BLOCKED - user did not execute) → Installation (BLOCKED) → C2 (Reply-To hijack ready but not triggered) → Actions on Objectives (AWS credential theft intended but not achieved)"
       }
@@ -211,147 +173,63 @@ export const projects = [
   },
   {
     id: 2,
-    title: "Ransomware Attack Investigation",
-    category: "Incident Response",
-    thumbnail: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop",
-    summary: "Complete forensic investigation of a ransomware attack affecting corporate infrastructure.",
-    date: "December 2024",
-    severity: "Critical",
-    socReport: {
-      detection: {
-        summary: "On December 15, 2024 at 09:15 AM, our SOC detected anomalous encryption activity across multiple file servers through SIEM correlation rules.",
-        alertSource: "SIEM - File Integrity Monitoring (FIM) + EDR Alerts",
-        initialIndicators: [
-          "Mass file modifications across 5 file servers (3,247 files affected)",
-          "Unusual process spawning (suspicious executable in %TEMP% directory)",
-          "Spike in SMB traffic from compromised user workstation",
-          "Multiple users reporting inability to access network shares"
-        ],
-        mitreAttack: ["T1486 - Data Encrypted for Impact", "T1059 - Command and Scripting Interpreter"],
-        killChainPhase: "Actions on Objectives"
-      },
-      investigation: {
-        summary: "Deep-dive forensic analysis revealed a LockBit 3.0 ransomware variant delivered via spear-phishing campaign targeting HR department.",
-        rootCause: "Phishing email with malicious macro-enabled Excel attachment bypassed email gateway filters. User executed macro, downloading ransomware payload.",
-        timeline: [
-          { time: "09:15 AM", event: "Initial SIEM alert - Mass file encryption detected", phase: "Detection" },
-          { time: "09:30 AM", event: "IR team activated, affected systems isolated", phase: "Containment" },
-          { time: "09:45 AM", event: "Memory dump collected from patient zero workstation", phase: "Forensics" },
-          { time: "10:30 AM", event: "Ransomware variant identified as LockBit 3.0 via YARA rules", phase: "Analysis" },
-          { time: "11:00 AM", event: "Lateral movement vector identified (compromised admin credentials)", phase: "Analysis" },
-          { time: "11:45 AM", event: "All IOCs extracted and threat hunting initiated network-wide", phase: "Threat Hunting" }
-        ],
-        forensicFindings: [
-          {
-            title: "Initial Access Vector",
-            description: "Phishing email delivered to HR inbox with malicious Excel attachment (Invoice_2024.xlsm). Macro executed PowerShell script downloading ransomware from hxxp://185[.]220[.]101[.]42/payload.exe",
-            evidence: "Email logs, attachment hash: 7a3f5e9c2b1d..., PowerShell logs (Event ID 4104)",
-            mitreAttack: "T1566.001 - Spearphishing Attachment"
-          },
-          {
-            title: "Privilege Escalation & Lateral Movement",
-            description: "Attackers leveraged compromised credentials (HR manager account) to authenticate to domain controller, then moved laterally via SMB to file servers.",
-            evidence: "Windows Event Logs (Event ID 4624 - Logon Type 3, Event ID 4672 - Special Logon), Kerberos ticket analysis",
-            mitreAttack: "T1078 - Valid Accounts, T1021.002 - SMB/Windows Admin Shares"
-          },
-          {
-            title: "Encryption Execution",
-            description: "Ransomware encrypted 3,247 files across 5 file servers using AES-256 encryption. Ransom note dropped in each directory: README_RESTORE.txt",
-            evidence: "File system analysis, MFT timeline, encryption markers, ransom note analysis",
-            mitreAttack: "T1486 - Data Encrypted for Impact"
-          }
-        ],
-        toolsUsed: ["Splunk SIEM", "Volatility (Memory Forensics)", "FTK Imager", "Wireshark", "YARA", "CrowdStrike Falcon EDR"]
-      },
-      impact: {
-        severity: "Critical",
-        scope: {
-          affectedSystems: "5 file servers, 1 workstation (patient zero), 247 user accounts affected",
-          dataLoss: "No data exfiltration confirmed. 3,247 files encrypted (100% recovered from backups)",
-          downtime: "4 hours total - File server unavailability from 09:15 AM to 01:15 PM",
-          businessImpact: "Minimal - Operations continued with degraded file access. No customer-facing impact."
+    title: "SSH Brute-Force Attack on AWS EC2",
+    category: "Threat Hunting",
+    thumbnail: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=600&fit=crop",
+    summary: "Detected and mitigated coordinated SSH brute-force attack targeting AWS EC2 instance with automated credential enumeration.",
+    date: "January 2025",
+    severity: "High",
+    detailedReport: {
+      executiveSummary: "Detected a coordinated SSH brute-force attack targeting self-managed AWS EC2 Ubuntu instance through routine log monitoring. Analyzed hundreds of failed authentication attempts from two external IPs attempting username enumeration and root account compromise. Extracted IOCs, validated threat intelligence correlation with known botnet activity, and successfully mitigated the attack by blocking malicious sources and enforcing SSH key-based authentication. No unauthorized access achieved; system integrity validated clean.",
+      timeline: [
+        { time: "T+0", event: "AWS EC2 Ubuntu instance deployed with SSH (port 22) exposed for SOC lab practice", status: "deployment" },
+        { time: "T+3 days", event: "Routine monitoring of /var/log/auth.log identified anomalous authentication patterns", status: "detected" },
+        { time: "T+3d 10min", event: "Executed targeted log parsing: grep 'sshd' /var/log/auth.log | grep -i 'Failed password' - isolated attack signatures", status: "analyzed" },
+        { time: "T+3d 25min", event: "Identified two primary source IPs (172.235.168.148, 209.38.92.76) with hundreds of failed login attempts", status: "analyzed" },
+        { time: "T+3d 35min", event: "Behavioral analysis revealed 6-7 second request intervals indicating automated tooling (Hydra/Medusa pattern)", status: "analyzed" },
+        { time: "T+3d 45min", event: "Threat intelligence lookup confirmed both IPs flagged for brute-force campaigns, unauthorized scanning, credential stuffing", status: "validated" },
+        { time: "T+3d 50min", event: "Attack classified as SSH Brute-Force with username enumeration (T1110.001, T1078)", status: "classified" },
+        { time: "T+3d 55min", event: "Blocked malicious IPs at firewall level - immediate containment achieved", status: "contained" },
+        { time: "T+3d 60min", event: "Disabled password-based authentication in /etc/ssh/sshd_config (PasswordAuthentication no)", status: "hardened" },
+        { time: "T+3d 65min", event: "Enforced SSH key-based authentication - eliminated password attack surface", status: "hardened" },
+        { time: "T+3d 75min", event: "Validated system integrity via process inspection, file integrity checks - confirmed no compromise", status: "resolved" }
+      ],
+      findings: [
+        {
+          title: "High-Volume Automated Attack Pattern",
+          description: "Parsed logs revealed hundreds of failed SSH login attempts within compressed timeframes. Consistent 6-7 second intervals between authentication requests indicated automated brute-force tooling (likely Hydra, Medusa, or custom scripts). Attack sustained over multiple hours demonstrating persistent credential enumeration effort.",
+          severity: "high",
+          evidence: "grep output: 400+ 'Failed password' entries, timestamps showing 6-7s intervals, user-agent fingerprint consistent with automation"
         },
-        affectedAssets: [
-          "FILESRV-01 through FILESRV-05 (Windows Server 2019)",
-          "HR-WORKSTATION-42 (Patient Zero)",
-          "Domain: CORP.LOCAL (admin credentials compromised)"
-        ],
-        estimatedCost: "$45,000 (incident response labor, backup restoration, 4 hours productivity loss)"
-      },
-      response: {
-        containment: [
-          "Immediately isolated affected file servers from network (09:30 AM)",
-          "Disabled compromised HR manager account across all systems",
-          "Blocked malicious IP (185.220.101.42) at firewall and web proxy",
-          "Quarantined patient zero workstation for forensic imaging"
-        ],
-        eradication: [
-          "Removed ransomware artifacts from all affected systems",
-          "Reset passwords for all privileged accounts (200+ accounts)",
-          "Rebuilt patient zero workstation from gold image",
-          "Deployed updated EDR signatures for LockBit 3.0 variant"
-        ],
-        recovery: [
-          "Restored 3,247 encrypted files from backup (verified integrity: 100%)",
-          "File servers brought back online at 01:15 PM (verified clean)",
-          "Conducted post-recovery integrity checks via file hashing",
-          "Monitored for 72 hours post-incident - no reinfection detected"
-        ],
-        communication: [
-          "Notified executive leadership within 30 minutes of detection",
-          "Coordinated with Legal and Compliance teams (no breach notification required)",
-          "Sent company-wide security advisory on phishing awareness",
-          "Briefed IT staff on IOCs and defensive measures implemented"
-        ]
-      },
-      lessonsLearned: {
-        whatWorkedWell: [
-          "SIEM detection rules triggered within minutes of encryption activity",
-          "Incident response team mobilized rapidly (15-minute response time)",
-          "Backup strategy proved effective - 100% data recovery with no loss",
-          "Network segmentation limited ransomware spread to file servers only"
-        ],
-        areasForImprovement: [
-          "Email gateway failed to detect malicious macro - needs tuning",
-          "Privileged account credentials stored in browser on user workstation",
-          "Lack of MFA on administrative accounts enabled lateral movement",
-          "EDR agent not installed on 2 of 5 file servers (visibility gap)"
-        ],
-        recommendations: [
-          {
-            priority: "Critical",
-            action: "Implement MFA for all administrative and privileged accounts",
-            owner: "IT Security Team",
-            timeline: "30 days"
-          },
-          {
-            priority: "High",
-            action: "Deploy advanced email threat protection (sandbox analysis for attachments)",
-            owner: "Email Security Team",
-            timeline: "60 days"
-          },
-          {
-            priority: "High",
-            action: "Conduct organization-wide phishing simulation and security awareness training",
-            owner: "Security Awareness Team",
-            timeline: "45 days"
-          },
-          {
-            priority: "Medium",
-            action: "Implement application whitelisting on all endpoints to prevent unauthorized executable execution",
-            owner: "Endpoint Security Team",
-            timeline: "90 days"
-          },
-          {
-            priority: "Medium",
-            action: "Enhance network segmentation - isolate file servers in dedicated VLAN with stricter access controls",
-            owner: "Network Team",
-            timeline: "90 days"
-          }
-        ],
-        mitreMapping: "This incident mapped to MITRE ATT&CK tactics: Initial Access (T1566), Execution (T1059), Privilege Escalation (T1078), Lateral Movement (T1021), Impact (T1486)",
-        killChainMapping: "Cyber Kill Chain phases observed: Delivery (phishing) → Exploitation (macro execution) → Installation (ransomware payload) → Command & Control (minimal) → Actions on Objectives (encryption)"
-      }
+        {
+          title: "Username Enumeration & Dictionary Attack",
+          description: "Attacker systematically attempted multiple invalid usernames (admin, test, user, ubuntu, oracle, postgres) before focusing on root account. Pattern indicates dictionary-based username enumeration followed by targeted root compromise attempts. Sequential username variation confirms reconnaissance phase preceding brute-force escalation.",
+          severity: "high",
+          evidence: "Log analysis: 15+ unique invalid usernames attempted, 200+ root login failures, sequential alphabetical/common username patterns"
+        },
+        {
+          title: "Malicious Source IP Correlation - Botnet Activity",
+          description: "Threat intelligence analysis of source IPs (172.235.168.148, 209.38.92.76) returned reputation scores flagging both as active brute-force nodes. IPs previously associated with credential stuffing campaigns, SSH scanning operations, and distributed attack infrastructure. Geographic origin mismatched legitimate business access patterns (unauthorized foreign source).",
+          severity: "critical",
+          evidence: "AbuseIPDB reputation: 172.235.168.148 (98% malicious confidence, 47 reports), 209.38.92.76 (95% confidence, 33 reports), linked to botnet C2 infrastructure"
+        },
+        {
+          title: "Root Account Targeting - Privilege Escalation Intent",
+          description: "Following failed username enumeration, attacker concentrated 80% of attempts on root account compromise. Demonstrates understanding of Linux privilege hierarchy and intent to achieve immediate full system control. Attack methodology aligned with T1078 (Valid Accounts) MITRE technique - targeting default administrative credentials.",
+          severity: "critical",
+          evidence: "Log grep: 320+ 'Failed password for root' entries, root-focused attack sustained 90+ minutes after initial failed generic usernames"
+        }
+      ],
+      recommendations: [
+        "Implement fail2ban or OSSEC intrusion prevention to auto-block IPs after threshold failed attempts (e.g., 5 failures = 1-hour ban)",
+        "Deploy CloudWatch or centralized SIEM (Splunk/ELK) for real-time SSH authentication alerting - reduce detection lag from manual log review",
+        "Enforce SSH key-based authentication organization-wide - disable password auth on all production/lab instances",
+        "Change default SSH port from 22 to non-standard high port (e.g., 2222) to reduce automated scanner hits",
+        "Implement IP allowlisting for SSH access where feasible - restrict connection sources to known administrator IPs",
+        "Enable MFA for SSH using Google Authenticator PAM module for defense-in-depth even with key-based auth",
+        "Schedule regular threat intelligence enrichment of auth.log source IPs to proactively block known malicious actors"
+      ],
+      toolsUsed: ["grep (Linux CLI)", "auth.log Analysis", "Threat Intelligence Platforms", "AWS EC2 Firewall", "SSH Configuration Hardening", "AbuseIPDB", "Ubuntu UFW Firewall"]
     }
   },
   {
