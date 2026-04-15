@@ -451,35 +451,37 @@ const ProjectDetail = () => {
                 </Card>
               </div>
 
-              {/* Recommendations */}
-              <Card className="bg-slate-800/60 backdrop-blur-sm border-purple-500/30 shadow-xl">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-light text-white">Action Plan & Recommendations</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {report.lessonsLearned.recommendations.map((rec, idx) => (
-                    <div 
-                      key={idx}
-                      className="bg-slate-900/60 p-6 rounded-lg border-l-4 border-purple-400 hover:shadow-lg transition-all"
-                    >
-                      <div className="flex items-start justify-between mb-3">
-                        <Badge 
-                          variant={rec.priority === 'Critical' ? 'destructive' : 'outline'}
-                          className={rec.priority === 'High' ? 'border-orange-400 text-orange-300 bg-orange-950/50' : ''}
-                        >
-                          {rec.priority} Priority
-                        </Badge>
-                        <span className="text-sm text-blue-300">{rec.timeline}</span>
+              {/* Recommendations - Only show if exists */}
+              {report.lessonsLearned.recommendations && report.lessonsLearned.recommendations.length > 0 && (
+                <Card className="bg-slate-800/60 backdrop-blur-sm border-purple-500/30 shadow-xl">
+                  <CardHeader>
+                    <CardTitle className="text-2xl font-light text-white">Action Plan & Recommendations</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {report.lessonsLearned.recommendations.map((rec, idx) => (
+                      <div 
+                        key={idx}
+                        className="bg-slate-900/60 p-6 rounded-lg border-l-4 border-purple-400 hover:shadow-lg transition-all"
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <Badge 
+                            variant={rec.priority === 'Critical' ? 'destructive' : 'outline'}
+                            className={rec.priority === 'High' ? 'border-orange-400 text-orange-300 bg-orange-950/50' : ''}
+                          >
+                            {rec.priority} Priority
+                          </Badge>
+                          <span className="text-sm text-blue-300">{rec.timeline}</span>
+                        </div>
+                        <p className="text-lg text-white mb-2">{rec.action}</p>
+                        <div className="flex items-center gap-2 text-sm text-blue-400">
+                          <span className="font-semibold">Owner:</span>
+                          <span>{rec.owner}</span>
+                        </div>
                       </div>
-                      <p className="text-lg text-white mb-2">{rec.action}</p>
-                      <div className="flex items-center gap-2 text-sm text-blue-400">
-                        <span className="font-semibold">Owner:</span>
-                        <span>{rec.owner}</span>
-                      </div>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
+                    ))}
+                  </CardContent>
+                </Card>
+              )}
 
               {/* Framework Mapping */}
               <div className="grid md:grid-cols-2 gap-6">
