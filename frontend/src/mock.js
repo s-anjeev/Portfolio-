@@ -424,51 +424,15 @@ export const projects = [
   },
   {
     id: 7,
-    title: "Malware Outbreak Response",
-    category: "Malware Analysis",
-    thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
-    summary: "Rapid response to malware outbreak affecting multiple departments.",
-    date: "July 2024",
-    severity: "High",
-    detailedReport: {
-      executiveSummary: "A worm variant propagated through a network share, affecting 42 workstations across three departments. The malware was designed for cryptocurrency mining and network reconnaissance. Complete remediation achieved within 8 hours.",
-      timeline: [
-        { time: "01:00 PM", event: "Users report slow system performance", status: "detected" },
-        { time: "01:30 PM", event: "Antivirus alerts on multiple endpoints", status: "responded" },
-        { time: "02:00 PM", event: "Network share identified as infection vector", status: "analyzed" },
-        { time: "02:30 PM", event: "Affected systems isolated", status: "contained" },
-        { time: "05:00 PM", event: "Malware analysis completed", status: "analyzed" },
-        { time: "09:00 PM", event: "All systems cleaned and verified", status: "resolved" }
-      ],
-      findings: [
-        {
-          title: "Propagation Method",
-          description: "Worm spread through open network share with write permissions using autorun functionality.",
-          severity: "high",
-          evidence: "Network share logs, file creation timestamps"
-        },
-        {
-          title: "Malicious Activity",
-          description: "Cryptocurrency miner consuming 80%+ CPU, network scanning module active.",
-          severity: "high",
-          evidence: "Process analysis, network traffic, memory forensics"
-        },
-        {
-          title: "Persistence Mechanism",
-          description: "Created scheduled tasks and modified startup registry keys.",
-          severity: "medium",
-          evidence: "Task scheduler, registry analysis"
-        }
-      ],
-      recommendations: [
-        "Disable autorun functionality across all endpoints",
-        "Review and restrict network share permissions",
-        "Update endpoint protection signatures",
-        "Implement network segmentation",
-        "Deploy next-generation antivirus with behavioral detection"
-      ],
-      toolsUsed: ["Cuckoo Sandbox", "Process Hacker", "Autoruns", "Network Miner"]
-    }
+    title: "Building a Modern SOC: Lessons from the Frontlines",
+    category: "Cybersecurity Insights",
+    thumbnail: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop",
+    summary: "Deep dive into security operations center design, threat detection strategies, and incident response workflows. Published on Medium.",
+    date: "January 2025",
+    severity: "Medium",
+    readTime: "8 min read",
+    externalUrl: "https://medium.com",
+    isExternal: true
   }
 ];
 

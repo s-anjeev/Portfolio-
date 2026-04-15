@@ -281,7 +281,13 @@ const Home = () => {
               <Card 
                 key={project.id}
                 className={`group cursor-pointer overflow-hidden bg-slate-900/80 backdrop-blur-sm border-slate-700/50 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-900/20 scroll-reveal-scale stagger-${(index % 3) + 1}`}
-                onClick={() => navigate(`/project/${project.id}`)}
+                onClick={() => {
+                  if (project.isExternal && project.externalUrl) {
+                    window.open(project.externalUrl, '_blank', 'noopener,noreferrer');
+                  } else {
+                    navigate(`/project/${project.id}`);
+                  }
+                }}
               >
                 <CardContent className="p-6 space-y-4">
                   {/* Header with category and read time */}
@@ -323,7 +329,7 @@ const Home = () => {
                   {/* Read Article Link */}
                   <div className="pt-2">
                     <span className="text-cyan-400 text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-                      Read Article
+                      {project.isExternal ? 'Read on Medium' : 'Read Article'}
                       <ChevronRight className="w-4 h-4" />
                     </span>
                   </div>

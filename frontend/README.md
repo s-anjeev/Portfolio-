@@ -486,6 +486,73 @@ Used for other writeups. Simpler structure for quick case studies.
 - Malware Analysis
 - Network Security
 
+#### Format 3: External Article Link (Medium, Blog, etc.)
+
+Use this format to link to articles published on Medium or other external platforms instead of hosting the full writeup on your portfolio.
+
+**Location:** `/app/frontend/src/mock.js`
+
+```javascript
+{
+  id: 7,
+  title: "Building a Modern SOC: Lessons from the Frontlines",
+  category: "Cybersecurity Insights",  // Any category
+  thumbnail: "https://images.unsplash.com/photo-XXXXX?w=800&h=600&fit=crop",
+  summary: "Brief 2-3 line description of the article content.",
+  date: "January 2025",
+  severity: "Medium",  // Optional: Critical, High, Medium, Low
+  readTime: "8 min read",  // Display custom read time
+  externalUrl: "https://medium.com/@yourusername/your-article-slug",
+  isExternal: true  // REQUIRED: Tells the app this is an external link
+}
+```
+
+**How to update the Medium article link (Project ID 7):**
+
+1. Open `/app/frontend/src/mock.js`
+2. Find the writeup with `id: 7`
+3. Update the following fields:
+
+```javascript
+{
+  id: 7,
+  title: "YOUR ARTICLE TITLE",  // Copy from Medium
+  category: "YOUR CATEGORY",  // e.g., "Threat Intelligence", "Security Research"
+  summary: "YOUR 2-3 LINE SUMMARY",  // Brief description
+  date: "MONTH YEAR",  // e.g., "March 2025"
+  readTime: "X min read",  // e.g., "10 min read" (check Medium)
+  externalUrl: "YOUR_MEDIUM_ARTICLE_URL",  // Full URL
+  isExternal: true  // Keep this as true
+}
+```
+
+**Example - Real Medium Article:**
+
+```javascript
+{
+  id: 7,
+  title: "Hunting APTs with YARA Rules: A Practical Guide",
+  category: "Malware Analysis",
+  thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
+  summary: "Comprehensive guide to writing effective YARA rules for advanced persistent threat detection, including real-world examples and best practices.",
+  date: "February 2025",
+  severity: "Medium",
+  readTime: "12 min read",
+  externalUrl: "https://medium.com/@sanjeevkumar/hunting-apts-with-yara-rules-abc123",
+  isExternal: true
+}
+```
+
+**What happens when users click:**
+- The card shows "Read on Medium" instead of "Read Article"
+- Clicking opens the Medium article in a new tab
+- Users are redirected to your external content
+
+**Thumbnail Image Options:**
+- Use Unsplash: `https://images.unsplash.com/photo-XXXXX?w=800&h=600&fit=crop`
+- Search Unsplash: https://unsplash.com/s/photos/cybersecurity
+- Use Medium's featured image URL (must be publicly accessible)
+
 ---
 
 ### 4. Technical Arsenal (Tools)
