@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { 
   Shield, Mail, Linkedin, Github, Download, 
   Network, Brain, Database, HardDrive, Globe, Box, Search, 
-  ChevronRight, Calendar, MapPin, Briefcase, Award, Clock
+  ChevronRight, Calendar, MapPin, Briefcase, Award, Clock, Bug
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { studentInfo, experiences, projects, tools, driveMotivation } from '../mock';
+import { studentInfo, experiences, projects, tools, driveMotivation, incidentResponseStats } from '../mock';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -261,6 +261,100 @@ const Home = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SOC & Incident Response Achievements */}
+      <section className="py-20 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_var(--tw-gradient-stops))] from-cyan-600/5 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_var(--tw-gradient-stops))] from-blue-600/5 via-transparent to-transparent pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Header */}
+          <div className="text-center mb-12 scroll-reveal">
+            <h2 className="text-4xl md:text-5xl font-light mb-4 tracking-tight">
+              <span className="text-white">{incidentResponseStats.heading}</span>
+            </h2>
+            <p className="text-blue-200/70 max-w-2xl mx-auto text-sm md:text-base">
+              {incidentResponseStats.subheading}
+            </p>
+          </div>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {/* Total Incidents Card - Featured */}
+            <Card className="md:col-span-2 lg:col-span-1 bg-gradient-to-br from-cyan-600/20 via-blue-600/20 to-purple-600/20 border-cyan-500/30 backdrop-blur-sm scroll-reveal">
+              <CardContent className="p-8 text-center">
+                <div className="mb-3">
+                  <Shield className="w-12 h-12 text-cyan-400 mx-auto" />
+                </div>
+                <div className="text-5xl font-light text-white mb-2">
+                  {incidentResponseStats.totalIncidents}
+                </div>
+                <div className="text-cyan-300 font-medium text-sm uppercase tracking-wider">
+                  Incidents Responded
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Achievement Cards */}
+            {incidentResponseStats.achievements.map((achievement, index) => {
+              const IconComponent = {
+                Mail: Mail,
+                Shield: Shield,
+                Bug: Bug,
+                Network: Network
+              }[achievement.icon] || Shield;
+
+              return (
+                <Card 
+                  key={achievement.id}
+                  className={`bg-slate-800/60 backdrop-blur-sm border-blue-700/30 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-900/20 scroll-reveal stagger-${index + 1}`}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 bg-gradient-to-br from-blue-600/30 to-cyan-600/30 rounded-lg">
+                        <IconComponent className="w-6 h-6 text-cyan-400" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="text-white font-medium text-sm">
+                            {achievement.title}
+                          </h3>
+                          <Badge variant="outline" className="border-cyan-400 text-cyan-300 bg-cyan-950/50 text-xs">
+                            {achievement.count}
+                          </Badge>
+                        </div>
+                        <p className="text-blue-200/60 text-xs leading-relaxed">
+                          {achievement.description}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+
+          {/* Optional: Key Skills Pills */}
+          <div className="flex flex-wrap justify-center gap-3 mt-8 scroll-reveal stagger-2">
+            <Badge variant="outline" className="border-blue-500/40 text-blue-300 bg-blue-950/40 px-4 py-2 text-xs">
+              SIEM Analysis
+            </Badge>
+            <Badge variant="outline" className="border-purple-500/40 text-purple-300 bg-purple-950/40 px-4 py-2 text-xs">
+              Threat Intelligence
+            </Badge>
+            <Badge variant="outline" className="border-cyan-500/40 text-cyan-300 bg-cyan-950/40 px-4 py-2 text-xs">
+              Digital Forensics
+            </Badge>
+            <Badge variant="outline" className="border-orange-500/40 text-orange-300 bg-orange-950/40 px-4 py-2 text-xs">
+              Incident Response
+            </Badge>
+            <Badge variant="outline" className="border-green-500/40 text-green-300 bg-green-950/40 px-4 py-2 text-xs">
+              Malware Analysis
+            </Badge>
           </div>
         </div>
       </section>

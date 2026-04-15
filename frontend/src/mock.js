@@ -27,6 +27,43 @@ export const experiences = [
   }
 ];
 
+// SOC & Incident Response Achievements
+export const incidentResponseStats = {
+  totalIncidents: "5+",
+  heading: "Incident Response Experience",
+  subheading: "Hands-on SOC analysis and threat detection across multiple attack vectors",
+  achievements: [
+    {
+      id: 1,
+      title: "Email Security Incidents",
+      count: "2+",
+      description: "Phishing campaigns, spoofing attacks, malicious attachments",
+      icon: "Mail"
+    },
+    {
+      id: 2,
+      title: "Brute-Force Attacks",
+      count: "3+",
+      description: "SSH, RDP, and web application authentication attacks",
+      icon: "Shield"
+    },
+    {
+      id: 3,
+      title: "Malware Analysis",
+      count: "3+",
+      description: "PE32 executables, ransomware variants, worm propagation",
+      icon: "Bug"
+    },
+    {
+      id: 4,
+      title: "Network Threats",
+      count: "2+",
+      description: "C2 traffic detection, data exfiltration, lateral movement",
+      icon: "Network"
+    }
+  ]
+};
+
 export const projects = [
   {
     id: 1,

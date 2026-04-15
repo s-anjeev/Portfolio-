@@ -316,6 +316,115 @@ export const experiences = [
 
 ---
 
+### 2.5. SOC & Incident Response Achievements
+
+**Location:** `/app/frontend/src/mock.js` - After experiences array
+
+This section displays your hands-on incident response experience and SOC achievements between the Career Timeline and Writeups sections.
+
+```javascript
+export const incidentResponseStats = {
+  totalIncidents: "5+",
+  heading: "Incident Response Experience",
+  subheading: "Hands-on SOC analysis and threat detection across multiple attack vectors",
+  achievements: [
+    {
+      id: 1,
+      title: "Email Security Incidents",
+      count: "2+",
+      description: "Phishing campaigns, spoofing attacks, malicious attachments",
+      icon: "Mail"
+    },
+    // ... more achievements
+  ]
+};
+```
+
+**How to update stats:**
+
+1. **Update total incidents:**
+   ```javascript
+   totalIncidents: "10+"  // Change to your count
+   ```
+
+2. **Customize heading/subheading:**
+   ```javascript
+   heading: "Your Custom Heading",
+   subheading: "Your description of experience"
+   ```
+
+3. **Add new achievement:**
+   ```javascript
+   {
+     id: 5,  // Increment ID
+     title: "Web Application Attacks",
+     count: "4+",
+     description: "SQL injection, XSS, CSRF, authentication bypass",
+     icon: "Globe"  // Mail, Shield, Bug, Network, Globe, Search
+   }
+   ```
+
+4. **Update existing achievement:**
+   - Change `title`: Achievement category name
+   - Change `count`: Number of incidents (e.g., "3+", "5+", "10+")
+   - Change `description`: Brief description of incident types
+   - Change `icon`: Choose from: Mail, Shield, Bug, Network, Globe, Search
+
+**Example - Advanced SOC Analyst:**
+```javascript
+export const incidentResponseStats = {
+  totalIncidents: "50+",
+  heading: "SOC Operations & Incident Response",
+  subheading: "Level 2 SOC analyst with extensive incident triage and threat hunting experience",
+  achievements: [
+    {
+      id: 1,
+      title: "Phishing & Email Threats",
+      count: "15+",
+      description: "Business email compromise, credential harvesting, malicious payloads",
+      icon: "Mail"
+    },
+    {
+      id: 2,
+      title: "Endpoint Security",
+      count: "20+",
+      description: "Ransomware, trojans, rootkits, privilege escalation",
+      icon: "Shield"
+    },
+    {
+      id: 3,
+      title: "Malware Reverse Engineering",
+      count: "8+",
+      description: "Static/dynamic analysis, IOC extraction, YARA rule development",
+      icon: "Bug"
+    },
+    {
+      id: 4,
+      title: "Network Intrusions",
+      count: "12+",
+      description: "Lateral movement, C2 communications, data exfiltration",
+      icon: "Network"
+    }
+  ]
+};
+```
+
+**Available Icons:**
+- `Mail` - Email security, phishing
+- `Shield` - Defense, protection, brute-force
+- `Bug` - Malware, vulnerabilities
+- `Network` - Network attacks, C2, exfiltration
+- `Globe` - Web attacks, application security
+- `Search` - Threat hunting, forensics
+
+**Visual Impact Tips:**
+- Use specific numbers: "12+" looks more credible than "10+"
+- Be concise in descriptions: 5-8 words max
+- Align achievement categories with your writeups
+- Update counts as you respond to more incidents
+
+---
+
 ### 3. Incident Response & Writeups
 
 **Location:** `/app/frontend/src/mock.js` - Lines 30-414
